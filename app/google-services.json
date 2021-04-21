@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "537023190540",
+    "project_id": "d-market-b1260",
+    "storage_bucket": "d-market-b1260.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537023190540:android:b0ac36bbbff610ade60029",
+        "android_client_info": {
+          "package_name": "com.example.a3dmarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "537023190540-7ofdb52ak6ovp0bvlav248735k7gv8gf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9S9xf0eN9PSba77cuEWvA6Kga1h_OC5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "537023190540-7ofdb52ak6ovp0bvlav248735k7gv8gf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
