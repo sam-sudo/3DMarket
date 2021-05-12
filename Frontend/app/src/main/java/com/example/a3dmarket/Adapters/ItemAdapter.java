@@ -48,8 +48,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterHol
 
 
                 Intent intent = new Intent(v.getContext(), ItemDetail.class);
-                intent.putExtra("name" ,"name2");
-                intent.putExtra("price" ,"price2");
+                intent.putExtra("name" ,itemList.get(position).getName());
+                intent.putExtra("price" ,itemList.get(position).getPrice());
 
                 v.getContext().startActivity(intent);
 
