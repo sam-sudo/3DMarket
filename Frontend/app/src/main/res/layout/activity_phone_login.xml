@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center"
+    android:background="#F3B200"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PhoneLogin">
+
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:paddingBottom="100dp"
+        android:paddingTop="100dp"
+        android:background="@drawable/view_bg_2"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_marginRight="5dp"
+                android:padding="15dp"
+                android:textAlignment="center"
+                android:text="+34"
+                android:layout_weight="2"
+                android:inputType="textEmailAddress"
+                android:id="@+id/country"
+                android:background="@drawable/edit_text_bg"
+                android:hint="(+ 34)"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></EditText>
+            <EditText
+                android:layout_marginLeft="5dp"
+                android:padding="15dp"
+                android:layout_weight="1"
+                android:inputType="phone"
+                android:drawableRight="@drawable/ic_baseline_local_phone_24"
+                android:id="@+id/number"
+                android:background="@drawable/edit_text_bg"
+                android:hint="123 456 789"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></EditText>
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:layout_margin="20dp"
+            android:background="@drawable/button_bg"
+            android:id="@+id/enviar"
+            android:text="Enviar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Button>
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

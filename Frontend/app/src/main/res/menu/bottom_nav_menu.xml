@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/home"
+        app:cnb_backgroundColor="@color/white"
+        app:cnb_textColor="#F3B200"
+        app:cnb_iconColor="#F3B200"
+        android:title="HOME"
+        android:icon="@drawable/ic_baseline_home_24"
+        ></item>
+
+    <item android:id="@+id/search"
+        app:cnb_backgroundColor="@color/white"
+        app:cnb_textColor="#F3B200"
+        app:cnb_iconColor="#F3B200"
+        android:title="BUSCAR"
+        android:icon="@drawable/ic_baseline_search_24"></item>
+
+    <item android:id="@+id/upload"
+        app:cnb_backgroundColor="@color/white"
+        app:cnb_textColor="#F3B200"
+        app:cnb_iconColor="#F3B200"
+        android:title="SUBIR"
+        android:icon="@drawable/ic_baseline_upload_24"></item>
+
+    <item android:id="@+id/settings"
+        app:cnb_backgroundColor="@color/white"
+        app:cnb_textColor="#F3B200"
+        app:cnb_iconColor="#F3B200"
+        android:title="AJUSTES"
+        android:icon="@drawable/ic_baseline_settings_24"></item>
+
+    <item android:id="@+id/profile"
+        app:cnb_backgroundColor="@color/white"
+        app:cnb_textColor="#F3B200"
+        app:cnb_iconColor="#F3B200"
+        android:title="PERFIL"
+        android:icon="@drawable/ic_baseline_person_24"></item>
+
+</menu>

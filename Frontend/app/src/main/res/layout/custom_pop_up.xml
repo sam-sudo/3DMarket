@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    android:layout_gravity="center"
+    android:padding="5dp"
+    android:background="@drawable/view_bg_2"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="475dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:textColor="#F3B200"
+        android:id="@+id/button_cerrar"
+        android:background="@drawable/edit_text_bg_2"
+        android:layout_margin="10dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_gravity="end"
+        android:textStyle="bold"
+        android:text="X"
+        android:layout_width="30dp"
+        android:layout_height="30dp"></TextView>
+
+    <TextView
+        android:textColor="#F3B200"
+        android:textStyle="bold"
+        android:padding="5dp"
+        android:textSize="20dp"
+        android:layout_margin="10dp"
+        android:textAlignment="center"
+        android:text="Se enviara un correo electrónico con un link para que puedas reestablecer tu contraseña"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_gravity="center"
+        app:lottie_rawRes="@raw/emailsend"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.airbnb.lottie.LottieAnimationView>
+
+
+
+</LinearLayout>
