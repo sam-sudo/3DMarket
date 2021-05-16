@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a3dmarket.R;
+import com.squareup.picasso.Picasso;
 
 public class ItemDetail extends AppCompatActivity {
 
@@ -23,6 +24,7 @@ public class ItemDetail extends AppCompatActivity {
 
 
         //img.setim(extras.getString("name"));
+        Picasso.get().load(extras.getString("img")).into(img);
         name.setText(extras.getString("name"));
         price.setText(extras.getString("price"));
     }
