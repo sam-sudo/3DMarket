@@ -1,32 +1,34 @@
 package com.example.a3dmarket.Fragments;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.TextView;
 
 
-
+import com.example.a3dmarket.Adapters.Preview_Items_ImgAdapter;
 import com.example.a3dmarket.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,9 +36,16 @@ import java.util.Date;
  */
 public class UploadFragment extends Fragment {
 
-    Button btnSelectFiles;
+    TextView fileName;
+    Button btnSelectImg;
     Button btnUp;
+    Button btnSelectFile;
     Uri uri;
+    Uri file3d;
+    ArrayList<Uri> previewImgList;
+
+
+    private Preview_Items_ImgAdapter preview_items_imgAdapter;
     DatabaseReference db    = FirebaseDatabase.getInstance().getReference();
 
     private int VALOR_RETORNO = 1;
@@ -52,8 +61,6 @@ public class UploadFragment extends Fragment {
 
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,10 +68,17 @@ public class UploadFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_upload, container, false);
 
 
-        btnSelectFiles = view.findViewById(R.id.selectFiles);
+        btnSelectImg = view.findViewById(R.id.selectImg);
+        btnSelectFile = view.findViewById(R.id.selectFile);
         btnUp = view.findViewById(R.id.upFiles);
+        fileName = view.findViewById(R.id.previewObjetText);
+        previewImgList = new ArrayList();
 
-        btnSelectFiles.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+        btnSelectImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -81,25 +95,59 @@ public class UploadFragment extends Fragment {
                  */
 
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("*/*");
+                intent.setType("image/*");
                 startActivityForResult(Intent.createChooser(intent, "Choose File"), VALOR_RETORNO);
 
 
             }
         });
 
-        btnUp.setOnClickListener(new View.OnClickListener() {
+
+        btnSelectFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(uri != null){
-                    UpFilesToFirebase(uri);
-                    uri = null;
-                    btnUp.setEnabled(false);
-                }
+
+                /**
+                 * / : poder seleccionar todos los archivos
+                 * audio/* : solo seleccionar archivos de audio .mp3,.wav...
+                 * video/* : solo seleccionar archivos de video .mp4,.avi....
+                 * image/* : solo seleccionar archivos de imágen .jpg,.png....
+                 * text/plain : solo seleccionar archivos con texto plano.
+                 *
+                 * Con setType("video/*|image/*"); Con pipe puedes poner varios
+                 *
+                 */
+
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("application/vnd.ms-pki.stl");
+                startActivityForResult(Intent.createChooser(intent, "Choose File"), VALOR_RETORNO);
+
             }
         });
 
-        // Inflate the layout for this fragment
+
+        btnUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(previewImgList.size() > 0 ){
+
+                    for (Uri uri: previewImgList) {
+                        UpFilesToFirebase(uri);
+                    }
+
+
+                    previewImgList.clear();
+                    btnUp.setEnabled(false);
+
+
+                }
+
+
+            }
+        });
+
+
         return view;
     }
 
@@ -109,7 +157,8 @@ public class UploadFragment extends Fragment {
          super.onActivityResult(requestCode, resultCode, data);
          Context context = getContext();
 
-
+         String fileRegex = ".*\\.stl";
+         String imgRegex = "image/.*";
 
          if ( resultCode == Activity.RESULT_OK) {
 
@@ -120,8 +169,44 @@ public class UploadFragment extends Fragment {
 
               uri = data.getData();
 
+
+
              if(uri != null){
-                 btnUp.setEnabled(true);
+                 ContentResolver cr = context.getContentResolver();
+                 String mime = cr.getType(uri);
+                 Log.d("TAG", "onActivityResult: es ...." + mime);
+
+                 if(mime.matches(imgRegex)){
+                     Log.d("TAG", "onActivityResult: es imagen");
+                     //btnUp.setEnabled(true);
+
+                     previewImgList.add(uri);
+
+                     RecyclerView recyclerView = getView().findViewById(R.id.previewImgReciclerView);
+
+                     LinearLayoutManager horizontalLayoutManager
+                             = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+
+                     recyclerView.setLayoutManager(horizontalLayoutManager);
+
+                     preview_items_imgAdapter = new Preview_Items_ImgAdapter(context,previewImgList);
+
+                     recyclerView.setAdapter(preview_items_imgAdapter);
+
+                 }
+
+                 if(mime.matches(fileRegex)){
+
+                     file3d = uri;
+                     fileName.setText(uri.getLastPathSegment());
+                 }
+
+                 if (file3d != null && previewImgList.size() > 0) {
+                     btnUp.setEnabled(true);
+                 }
+
+
+
              }
          }
      }
@@ -132,7 +217,7 @@ public class UploadFragment extends Fragment {
         // Create a storage reference from our app
         StorageReference storageRef = storage.getReference();
 
-        // Create a reference to 'images/mountains.jpg'
+        // Create a reference 
         StorageReference mountainImagesRef = storageRef.child("imagen/"+ uri.getLastPathSegment());
         mountainImagesRef.putFile(uri);
 
