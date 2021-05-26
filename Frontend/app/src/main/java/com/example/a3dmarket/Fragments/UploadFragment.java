@@ -4,15 +4,15 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,12 +23,17 @@ import android.widget.TextView;
 
 import com.example.a3dmarket.Adapters.Preview_Items_ImgAdapter;
 import com.example.a3dmarket.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,19 +41,32 @@ import java.util.ArrayList;
  */
 public class UploadFragment extends Fragment {
 
-    TextView fileName;
+    TextView editFileName;
+    TextView editName;
+    TextView editPrice;
+    TextView editDescription;
+
     Button btnSelectImg;
     Button btnUp;
     Button btnSelectFile;
+
     Uri uri;
     Uri file3d;
+
     ArrayList<Uri> previewImgList;
+    String fileName;
+    String imgName;
 
 
     private Preview_Items_ImgAdapter preview_items_imgAdapter;
-    DatabaseReference db    = FirebaseDatabase.getInstance().getReference();
+    //REAL TIME FIREBASE
+    //DatabaseReference db    = FirebaseDatabase.getInstance().getReference();
+
+    //DATABASE FIREBASE
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private int VALOR_RETORNO = 1;
+    //STORAGE FIREBASE
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
 
@@ -71,7 +89,13 @@ public class UploadFragment extends Fragment {
         btnSelectImg = view.findViewById(R.id.selectImg);
         btnSelectFile = view.findViewById(R.id.selectFile);
         btnUp = view.findViewById(R.id.upFiles);
-        fileName = view.findViewById(R.id.previewObjetText);
+
+        editFileName = view.findViewById(R.id.previewObjetText);
+        editName = view.findViewById(R.id.editName);
+        editPrice = view.findViewById(R.id.editPrice);
+        editDescription = view.findViewById(R.id.editDescription);
+
+
         previewImgList = new ArrayList();
 
 
@@ -130,14 +154,21 @@ public class UploadFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                ArrayList<Uri> imagesUri = new ArrayList<Uri>() {
+                };
+
                 if(previewImgList.size() > 0 ){
 
                     for (Uri uri: previewImgList) {
-                        UpFilesToFirebase(uri);
+                        Log.d("TAG", "onClick: " + uri);
+                        imagesUri.add(uri);
                     }
 
+                    UpFilesToFirebase(imagesUri);
 
-                    previewImgList.clear();
+
+
+
                     btnUp.setEnabled(false);
 
 
@@ -171,6 +202,7 @@ public class UploadFragment extends Fragment {
 
 
 
+
              if(uri != null){
                  ContentResolver cr = context.getContentResolver();
                  String mime = cr.getType(uri);
@@ -179,6 +211,8 @@ public class UploadFragment extends Fragment {
                  if(mime.matches(imgRegex)){
                      Log.d("TAG", "onActivityResult: es imagen");
                      //btnUp.setEnabled(true);
+
+
 
                      previewImgList.add(uri);
 
@@ -197,11 +231,16 @@ public class UploadFragment extends Fragment {
 
                  if(mime.matches(fileRegex)){
 
+                     Log.d("TAG", "URI: " +uri);
+
                      file3d = uri;
-                     fileName.setText(uri.getLastPathSegment());
+                     fileName = getNameFromDrive(uri);
+
+
+                     editFileName.setText(fileName);
                  }
 
-                 if (file3d != null && previewImgList.size() > 0) {
+                 if (uri != null && previewImgList.size() > 0) {
                      btnUp.setEnabled(true);
                  }
 
@@ -211,19 +250,149 @@ public class UploadFragment extends Fragment {
          }
      }
 
-    private void UpFilesToFirebase(Uri uri) {
+    private String getNameFromDrive(Uri uri) {
+        // retrun the name from a file in drive
+        Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()){
+            return  cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+        }
 
-        //SUBIR AL STORAGE
+        return "";
+    }
+
+    private void UpFilesToFirebase(ArrayList<Uri> uriArr) {
+
+        //-----SUBIR AL STORAGE-----
         // Create a storage reference from our app
         StorageReference storageRef = storage.getReference();
 
-        // Create a reference 
-        StorageReference mountainImagesRef = storageRef.child("imagen/"+ uri.getLastPathSegment());
-        mountainImagesRef.putFile(uri);
+        // Create a reference
+        // Archivo
+        StorageReference fileRef = storageRef.child("archivos/"+ fileName);
 
-        //SUBIR DATOS A FIRESTORE DATABSE
 
-        //db.child("items").child(String.valueOf(new Date().getTime())).child("username").setValue("name");
+
+        //------SUBIR DATOS A FIRESTORE DATABSE-----
+
+        fileRef.putFile(file3d).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+
+
+                Map<String, Object> objetToSendToFirebase = new HashMap<>();
+
+                objetToSendToFirebase.put("name", editName.getText().toString());
+                objetToSendToFirebase.put("price", editPrice.getText().toString());
+                objetToSendToFirebase.put("description", editDescription.getText().toString());
+                objetToSendToFirebase.put("urlFile", file3d.toString());
+
+
+
+                for (int i = 0; i < uriArr.size() ; i++) {
+
+                    imgName = getNameFromDrive(uriArr.get(i));
+
+                    // Create a reference
+                    // imagen
+                    StorageReference imagesRef = storageRef.child("imagen/"+ imgName);
+
+
+                    imagesRef.putFile(uriArr.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Log.d("TAG", "onSuccess: UPLOADED IMG");
+                        }
+                    });
+
+                    objetToSendToFirebase.put("urlImg"+i, uriArr.get(i).toString());
+                }
+
+                db.collection("items").add(objetToSendToFirebase).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("TAG", "UpFilesToFirebase: DONEE!!!");
+                        previewImgList.clear();
+                    }
+                });
+
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+        /*imagesRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.d("TAG", "onSuccess: upaloaded img");
+
+                //------SUBIR DATOS A FIRESTORE DATABSE-----
+
+                imagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+
+                        fileRef.putFile(file3d).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+
+
+                                Map<String, Object> objetToSendToFirebase = new HashMap<>();
+
+                                objetToSendToFirebase.put("name", editName.getText().toString());
+                                objetToSendToFirebase.put("price", editPrice.getText().toString());
+                                objetToSendToFirebase.put("description", editDescription.getText().toString());
+                                objetToSendToFirebase.put("urlFile", uri.toString());
+
+
+
+                                for (int i = 0; i < uriArr.size() ; i++) {
+                                    objetToSendToFirebase.put("urlImg"+i, uriArr.get(i).toString());
+                                }
+
+                                db.collection("items").add(objetToSendToFirebase).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Log.d("TAG", "UpFilesToFirebase: DONEE!!!");
+                                        previewImgList.clear();
+                                    }
+                                });
+
+
+                            }
+                        });
+
+
+                    }
+                });
+
+
+
+            }
+        });*/
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 

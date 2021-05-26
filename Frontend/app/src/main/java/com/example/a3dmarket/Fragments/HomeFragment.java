@@ -105,11 +105,12 @@ public class HomeFragment extends Fragment {
 
                     for (QueryDocumentSnapshot document : task.getResult()) {
 
-                        String url = (String) document.getData().get("url");
+                        String url = (String) document.getData().get("urlImg0");
                         String price = (String) document.getData().get("price");
                         String name = (String) document.getData().get("name");
+                        String description = (String) document.getData().get("description");
                         //Log.d("TAG", document.getId() + " => " + url);
-                        itemList.add(new Item(url, name, price));
+                        itemList.add(new Item(url, name, price, description));
 
                     }
 
