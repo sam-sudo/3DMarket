@@ -39,6 +39,7 @@ public class ItemDetail extends AppCompatActivity {
 
         TextView  name  = findViewById(R.id.name);
         TextView  price = findViewById(R.id.price);
+        TextView  description = findViewById(R.id.description);
         ImageView img   = findViewById(R.id.img);
 
         compraButton = (Button) findViewById(R.id.compraButton);
@@ -50,6 +51,7 @@ public class ItemDetail extends AppCompatActivity {
         Picasso.get().load(extras.getString("img")).into(img);
         name.setText(extras.getString("name"));
         price.setText(extras.getString("price"));
+        description.setText(extras.getString("description"));
 
         compraButton.setOnClickListener(new View.OnClickListener() {
             @Override
