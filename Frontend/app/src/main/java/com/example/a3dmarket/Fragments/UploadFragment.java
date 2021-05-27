@@ -278,67 +278,63 @@ public class UploadFragment extends Fragment {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
+                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+
+                        Map<String, String> objetToSendToFirebase = new HashMap<>();
+
+                        objetToSendToFirebase.put("name", editName.getText().toString());
+                        objetToSendToFirebase.put("price", editPrice.getText().toString());
+                        objetToSendToFirebase.put("description", editDescription.getText().toString());
+                        objetToSendToFirebase.put("urlFile", uri.toString());
 
 
-                Map<String, String> objetToSendToFirebase = new HashMap<>();
 
-                objetToSendToFirebase.put("name", editName.getText().toString());
-                objetToSendToFirebase.put("price", editPrice.getText().toString());
-                objetToSendToFirebase.put("description", editDescription.getText().toString());
-                objetToSendToFirebase.put("urlFile", file3d.toString());
+                        for (int i = 0; i < uriArr.size() ; i++) {
 
+                            imgName = getNameFromDrive(uriArr.get(i));
 
+                            // Create a reference
+                            // imagen
+                            StorageReference imagesRef = storageRef.child("imagen/"+ imgName);
 
-                for (int i = 0; i < uriArr.size() ; i++) {
-
-                    imgName = getNameFromDrive(uriArr.get(i));
-
-                    // Create a reference
-                    // imagen
-                    StorageReference imagesRef = storageRef.child("imagen/"+ imgName);
-
-                    int count = i;
-                    imagesRef.putFile(uriArr.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Log.d("TAG", "onSuccess: UPLOADED IMG");
-
-
-                            imagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            int count = i;
+                            imagesRef.putFile(uriArr.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
-                                public void onSuccess(Uri uri) {
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Log.d("TAG", "onSuccess: UPLOADED IMG");
 
-                                    Log.d("TAG", "onSuccess2: " + uri.toString());
-                                    Log.d("TAG", "onSuccess: "+count);
-                                    objetToSendToFirebase.put("urlImg"+ count, uri.toString());
 
-                                    if(count >= uriArr.size()-1){
+                                    imagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
 
-                                        db.collection("items").add(objetToSendToFirebase).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                            @Override
-                                            public void onSuccess(DocumentReference documentReference) {
-                                                Log.d("TAG", "UpFilesToFirebase: DONEE!!!");
-                                                previewImgList.clear();
+                                            Log.d("TAG", "onSuccess2: " + uri.toString());
+                                            Log.d("TAG", "onSuccess: "+count);
+                                            objetToSendToFirebase.put("urlImg"+ count, uri.toString());
+
+                                            if(count >= uriArr.size()-1){
+
+                                                db.collection("items").add(objetToSendToFirebase).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                    @Override
+                                                    public void onSuccess(DocumentReference documentReference) {
+                                                        Log.d("TAG", "UpFilesToFirebase: DONEE!!!");
+                                                        previewImgList.clear();
+                                                    }
+                                                });
+
                                             }
-                                        });
 
-                                    }
+                                        }
+                                    });
+
 
                                 }
                             });
-
-
                         }
-                    });
-
-
-
-
-
-                }
-
-
-
+                    }
+                });
 
             }
         });

@@ -27,7 +27,7 @@ public class ItemDetail extends AppCompatActivity {
 
 
     Button compraButton;
-    String getUrl = "https://firebasestorage.googleapis.com/v0/b/d-market-b1260.appspot.com/o/archivos%2F69-bauhaus.blend.zip?alt=media&token=c0f33f48-e4fe-4c41-b15a-709fdf8e7755";
+    String getUrl = "";
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -52,13 +52,15 @@ public class ItemDetail extends AppCompatActivity {
         name.setText(extras.getString("name"));
         price.setText(extras.getString("price"));
         description.setText(extras.getString("description"));
+        getUrl = extras.getString("fileUrl");
 
         compraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("TAG", "onClick: " + getUrl);
                 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(getUrl));
                 String title = URLUtil.guessFileName(getUrl, null, null);
-                request.setTitle("titulos");
+                request.setTitle(title);
                 request.setDescription("Descargando archivo");
                 String coockie = CookieManager.getInstance().getCookie(getUrl);
                 request.addRequestHeader("cookie", coockie);

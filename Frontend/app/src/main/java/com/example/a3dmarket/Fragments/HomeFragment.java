@@ -110,8 +110,9 @@ public class HomeFragment extends Fragment {
                         String price = (String) document.getData().get("price");
                         String name = (String) document.getData().get("name");
                         String description = (String) document.getData().get("description");
+                        String fileUrl = (String) document.getData().get("urlFile");
                         //Log.d("TAG", document.getId() + " => " + url);
-                        itemList.add(new Item(url, name, price, description));
+                        itemList.add(new Item(url, fileUrl, name, price, description));
 
 
                     }
