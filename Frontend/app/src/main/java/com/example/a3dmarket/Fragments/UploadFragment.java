@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.a3dmarket.Adapters.Preview_Items_ImgAdapter;
@@ -57,6 +58,8 @@ public class UploadFragment extends Fragment {
     String fileName;
     String imgName;
 
+    Context context ;
+
 
     private Preview_Items_ImgAdapter preview_items_imgAdapter;
     //REAL TIME FIREBASE
@@ -73,7 +76,7 @@ public class UploadFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        context= getActivity();
 
     }
 
@@ -164,12 +167,19 @@ public class UploadFragment extends Fragment {
                         imagesUri.add(uri);
                     }
 
-                    UpFilesToFirebase(imagesUri);
+                    try {
+                        UpFilesToFirebase(imagesUri);
+                        btnUp.setEnabled(false);
+                    }catch (Exception e){
+                        Log.d("TAG", "onClick: FALLO AL SUBIR ARCHUVOS");
+                        Toast.makeText(getContext(),"Faltan datos por rellenar",Toast.LENGTH_SHORT).show();
+                        btnUp.setEnabled(true);
+                    }
 
 
 
 
-                    btnUp.setEnabled(false);
+
 
 
                 }
@@ -252,7 +262,7 @@ public class UploadFragment extends Fragment {
 
     private String getNameFromDrive(Uri uri) {
         // retrun the name from a file in drive
-        Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null, null);
+        Cursor cursor = context.getContentResolver().query(uri, null, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()){
             return  cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
         }
