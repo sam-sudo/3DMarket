@@ -280,7 +280,7 @@ public class UploadFragment extends Fragment {
 
 
 
-                Map<String, Object> objetToSendToFirebase = new HashMap<>();
+                Map<String, String> objetToSendToFirebase = new HashMap<>();
 
                 objetToSendToFirebase.put("name", editName.getText().toString());
                 objetToSendToFirebase.put("price", editPrice.getText().toString());
@@ -297,24 +297,47 @@ public class UploadFragment extends Fragment {
                     // imagen
                     StorageReference imagesRef = storageRef.child("imagen/"+ imgName);
 
-
+                    int count = i;
                     imagesRef.putFile(uriArr.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Log.d("TAG", "onSuccess: UPLOADED IMG");
+
+
+                            imagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+
+                                    Log.d("TAG", "onSuccess2: " + uri.toString());
+                                    Log.d("TAG", "onSuccess: "+count);
+                                    objetToSendToFirebase.put("urlImg"+ count, uri.toString());
+
+                                    if(count >= uriArr.size()-1){
+
+                                        db.collection("items").add(objetToSendToFirebase).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                            @Override
+                                            public void onSuccess(DocumentReference documentReference) {
+                                                Log.d("TAG", "UpFilesToFirebase: DONEE!!!");
+                                                previewImgList.clear();
+                                            }
+                                        });
+
+                                    }
+
+                                }
+                            });
+
+
                         }
                     });
 
-                    objetToSendToFirebase.put("urlImg"+i, uriArr.get(i).toString());
+
+
+
+
                 }
 
-                db.collection("items").add(objetToSendToFirebase).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("TAG", "UpFilesToFirebase: DONEE!!!");
-                        previewImgList.clear();
-                    }
-                });
+
 
 
             }
@@ -386,15 +409,10 @@ public class UploadFragment extends Fragment {
 
 
 
-
-
-
-
-
-
-
-
     }
+
+
+
 
 
 }

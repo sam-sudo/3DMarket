@@ -24,6 +24,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -112,11 +113,12 @@ public class HomeFragment extends Fragment {
                         //Log.d("TAG", document.getId() + " => " + url);
                         itemList.add(new Item(url, name, price, description));
 
+
                     }
 
 
                     //get first the new data with a reverse from list of firebase
-                    //Collections.reverse(itemList);
+                    Collections.reverse(itemList);
                     adapter.notifyDataSetChanged();
                     Log.d("TAG", "Error dentro metodo");
 
