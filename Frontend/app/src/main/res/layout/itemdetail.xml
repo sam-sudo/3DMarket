@@ -30,6 +30,15 @@
        android:layout_height="300dp">
    </ImageView>
 
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/previewImgReciclerViewDetail"
+       android:layout_weight="1"
+       android:layout_margin="3dp"
+       android:layout_width="match_parent"
+       android:layout_height="120dp">
+
+   </androidx.recyclerview.widget.RecyclerView>
+
    <TextView
        android:layout_marginTop="50dp"
        android:layout_marginLeft="20dp"

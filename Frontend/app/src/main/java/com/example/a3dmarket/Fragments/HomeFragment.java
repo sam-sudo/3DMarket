@@ -26,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 
 public class HomeFragment extends Fragment {
@@ -106,7 +107,10 @@ public class HomeFragment extends Fragment {
 
                     for (QueryDocumentSnapshot document : task.getResult()) {
 
-                        String url = (String) document.getData().get("urlImg0");
+                        ArrayList<Map<String, Object>> imgList = (ArrayList<Map<String, Object>>) document.get("urlList");
+
+
+                        ArrayList url = imgList;
                         String price = (String) document.getData().get("price");
                         String name = (String) document.getData().get("name");
                         String description = (String) document.getData().get("description");

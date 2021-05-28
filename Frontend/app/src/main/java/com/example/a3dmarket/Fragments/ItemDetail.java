@@ -19,15 +19,24 @@ import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.example.a3dmarket.Adapters.Preview_Items_ImgAdapter;
 import com.example.a3dmarket.R;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 public class ItemDetail extends AppCompatActivity {
 
 
     Button compraButton;
     String getUrl = "";
+
+    private Preview_Items_ImgAdapter preview_items_imgAdapter;
+
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -47,12 +56,39 @@ public class ItemDetail extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
 
+        //hacer array de imagenes
+        ArrayList<Uri> imgUriList = new ArrayList<>();
+
+        for(String itemList: extras.getStringArrayList("img")){
+            imgUriList.add(Uri.parse(itemList));
+        }
+
+
+
         //img.setim(extras.getString("name"));
-        Picasso.get().load(extras.getString("img")).into(img);
+        Picasso.get().load(imgUriList.get(0)).into(img);
         name.setText(extras.getString("name"));
         price.setText(extras.getString("price"));
         description.setText(extras.getString("description"));
         getUrl = extras.getString("fileUrl");
+
+
+
+        RecyclerView recyclerView = this.findViewById(R.id.previewImgReciclerViewDetail);
+
+        LinearLayoutManager horizontalLayoutManager
+                = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+
+        recyclerView.setLayoutManager(horizontalLayoutManager);
+
+        preview_items_imgAdapter = new Preview_Items_ImgAdapter(getApplicationContext(),imgUriList);
+
+        recyclerView.setAdapter(preview_items_imgAdapter);
+
+
+
+
+
 
         compraButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +109,9 @@ public class ItemDetail extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Comenzando descarga", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
     }
 
     public  boolean isStoragePermissionGranted() {

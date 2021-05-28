@@ -2,9 +2,12 @@ package com.example.a3dmarket.Adapters;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +29,7 @@ public class Preview_Items_ImgAdapter extends RecyclerView.Adapter<Preview_Items
     private LayoutInflater mInflater;
 
 
+
     public Preview_Items_ImgAdapter(Context context, ArrayList previewImgList) {
         this.mInflater = LayoutInflater.from(context);
         this.previewImgList = previewImgList;
@@ -45,6 +49,17 @@ public class Preview_Items_ImgAdapter extends RecyclerView.Adapter<Preview_Items
         holder.setItemImg(previewImgList.get(position));
 
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                
+
+                Log.d("TAG", "onClick: real" + position );
+               //Picasso.get().load(previewImgList.get(position)).into();
+
+            }
+        });
 
 
     }
@@ -59,6 +74,7 @@ public class Preview_Items_ImgAdapter extends RecyclerView.Adapter<Preview_Items
      class ViewHolder extends RecyclerView.ViewHolder{
 
          RoundedImageView itemImgView;
+
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);

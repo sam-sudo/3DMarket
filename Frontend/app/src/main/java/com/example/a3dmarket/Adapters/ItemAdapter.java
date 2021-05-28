@@ -40,6 +40,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterHol
 
     @Override
     public void onBindViewHolder(@NonNull ItemAdapterHolder holder, int position) {
+
         holder.setItemImg(itemList.get(position));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +50,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterHol
 
                 Intent intent = new Intent(v.getContext(), ItemDetail.class);
 
-                intent.putExtra("img" ,itemList.get(position).getImg());
+                intent.putExtra("img" ,itemList.get(position).getImgList());
                 intent.putExtra("name" ,itemList.get(position).getName());
                 intent.putExtra("price" ,itemList.get(position).getPrice());
                 intent.putExtra("description" ,itemList.get(position).getDescription());
@@ -91,7 +92,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterHol
         void setItemImg(Item item){
 
 
-            Picasso.get().load(item.getImg()).into(itemImgView);
+            try {
+                Picasso.get().load(item.getImgList().get(0)).into(itemImgView);
+            }catch (Exception e){
+
+            }
 
         }
 

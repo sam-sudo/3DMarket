@@ -1,28 +1,34 @@
 package com.example.a3dmarket;
 
+import java.util.ArrayList;
+
 public class Item {
     //here i can use String variable to store image URL
 
-    private String img;
+    private ArrayList<String> imgList;
     private String fileUrl;
     private String name;
     private String price;
     private String description;
 
-    public Item(String img, String fileUrl,String name, String price, String description) {
-        this.img = img;
+    public Item(ArrayList<String> imgList, String fileUrl,String name, String price, String description) {
+        this.imgList = imgList;
         this.fileUrl = fileUrl;
         this.name = name;
         this.price = price;
         this.description = description;
     }
 
-    public Item(String img) {
-        this.img = img;
+    /*public Item(String img) {
+        this.imgList = img;
+    }*/
+
+    public void setImgList(ArrayList<String> img) {
+        this.imgList = imgList;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public ArrayList<String> getImgList() {
+        return imgList;
     }
 
     public String getDescription() {
@@ -57,7 +63,5 @@ public class Item {
         this.fileUrl = fileUrl;
     }
 
-    public String getImg() {
-        return img;
-    }
+
 }

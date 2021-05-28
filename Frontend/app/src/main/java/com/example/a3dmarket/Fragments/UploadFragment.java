@@ -31,7 +31,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -280,6 +279,7 @@ public class UploadFragment extends Fragment {
         // Archivo
         StorageReference fileRef = storageRef.child("archivos/"+ fileName);
 
+        ArrayList<String> realUrlList = new ArrayList<>();
 
 
         //------SUBIR DATOS A FIRESTORE DATABSE-----
@@ -292,12 +292,13 @@ public class UploadFragment extends Fragment {
                     @Override
                     public void onSuccess(Uri uri) {
 
-                        Map<String, String> objetToSendToFirebase = new HashMap<>();
+                        Map<String, Object> objetToSendToFirebase = new HashMap<>();
 
                         objetToSendToFirebase.put("name", editName.getText().toString());
                         objetToSendToFirebase.put("price", editPrice.getText().toString());
                         objetToSendToFirebase.put("description", editDescription.getText().toString());
                         objetToSendToFirebase.put("urlFile", uri.toString());
+                        //objetToSendToFirebase.put("imgList", uriArr);
 
 
 
@@ -320,11 +321,15 @@ public class UploadFragment extends Fragment {
                                         @Override
                                         public void onSuccess(Uri uri) {
 
+
                                             Log.d("TAG", "onSuccess2: " + uri.toString());
-                                            Log.d("TAG", "onSuccess: "+count);
-                                            objetToSendToFirebase.put("urlImg"+ count, uri.toString());
+
+                                            realUrlList.add(uri.toString());
 
                                             if(count >= uriArr.size()-1){
+
+                                                objetToSendToFirebase.put("urlList", realUrlList);
+
 
                                                 db.collection("items").add(objetToSendToFirebase).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                     @Override
