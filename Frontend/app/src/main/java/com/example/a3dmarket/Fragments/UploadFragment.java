@@ -34,6 +34,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -274,10 +275,11 @@ public class UploadFragment extends Fragment {
         //-----SUBIR AL STORAGE-----
         // Create a storage reference from our app
         StorageReference storageRef = storage.getReference();
+        String uniqueID = UUID.randomUUID().toString();
 
         // Create a reference
         // Archivo
-        StorageReference fileRef = storageRef.child("archivos/"+ fileName);
+        StorageReference fileRef = storageRef.child("archivos/"+ fileName + "_" + uniqueID);
 
         ArrayList<String> realUrlList = new ArrayList<>();
 
@@ -305,10 +307,12 @@ public class UploadFragment extends Fragment {
                         for (int i = 0; i < uriArr.size() ; i++) {
 
                             imgName = getNameFromDrive(uriArr.get(i));
+                            String uniqueID = UUID.randomUUID().toString();
+
 
                             // Create a reference
                             // imagen
-                            StorageReference imagesRef = storageRef.child("imagen/"+ imgName);
+                            StorageReference imagesRef = storageRef.child("imagen/"+ imgName + "_" + uniqueID);
 
                             int count = i;
                             imagesRef.putFile(uriArr.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
