@@ -22,7 +22,15 @@
            android:layout_alignParentTop="true"
            />
 
-       <!-- TODO: Update blank fragment layout -->
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/recyclerView"
+           android:paddingBottom="50dp"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+       </androidx.recyclerview.widget.RecyclerView>
+
+       <!--&lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;
        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
            xmlns:android="http://schemas.android.com/apk/res/android"
            xmlns:tools="http://schemas.android.com/tools"
@@ -41,7 +49,7 @@
 
            </androidx.recyclerview.widget.RecyclerView>
 
-       </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+       </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 
 
    </androidx.appcompat.widget.LinearLayoutCompat>
