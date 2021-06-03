@@ -2,6 +2,7 @@ package com.example.a3dmarket.Fragments;
 
 import android.Manifest;
 import android.app.DownloadManager;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -24,10 +25,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.a3dmarket.Adapters.Preview_Items_ImgAdapter;
+import com.example.a3dmarket.CheckoutPayment;
 import com.example.a3dmarket.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 public class ItemDetail extends AppCompatActivity {
 
@@ -93,25 +96,31 @@ public class ItemDetail extends AppCompatActivity {
         compraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: " + getUrl);
-                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(getUrl));
-                String title = URLUtil.guessFileName(getUrl, null, null);
-                request.setTitle(title);
-                request.setDescription("Descargando archivo");
-                String coockie = CookieManager.getInstance().getCookie(getUrl);
-                request.addRequestHeader("cookie", coockie);
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "titulo");
-
-                DownloadManager downloadManager = (DownloadManager)getSystemService(DOWNLOAD_SERVICE);
-                downloadManager.enqueue(request);
-
-                Toast.makeText(getApplicationContext(), "Comenzando descarga", Toast.LENGTH_SHORT).show();
+                //downloadAfterPay();
+                Intent intent = new Intent(ItemDetail.this, CheckoutPayment.class);
+                view.getContext().startActivity(intent);
             }
         });
 
 
 
+    }
+
+    private void downloadAfterPay() {
+        Log.d("TAG", "onClick: " + getUrl);
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(getUrl));
+        String title = URLUtil.guessFileName(getUrl, null, null);
+        request.setTitle(title);
+        request.setDescription("Descargando archivo");
+        String coockie = CookieManager.getInstance().getCookie(getUrl);
+        request.addRequestHeader("cookie", coockie);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "titulo");
+
+        DownloadManager downloadManager = (DownloadManager)getSystemService(DOWNLOAD_SERVICE);
+        downloadManager.enqueue(request);
+
+        Toast.makeText(getApplicationContext(), "Comenzando descarga", Toast.LENGTH_SHORT).show();
     }
 
     public  boolean isStoragePermissionGranted() {

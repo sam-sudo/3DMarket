@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imgToPay"
+        android:layout_gravity="center"
+        android:layout_margin="50px"
+        android:layout_width="300px"
+        android:layout_height="300px">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/pricePay"
+        android:text="25.20"
+        android:layout_gravity="center"
+        android:layout_marginBottom="300px"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+    <com.stripe.android.view.CardInputWidget
+        android:id="@+id/stripeInputPay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    </com.stripe.android.view.CardInputWidget>
+
+    <Button
+        android:id="@+id/payButton"
+        android:text="PAY"
+        android:layout_marginTop="30px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </Button>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
