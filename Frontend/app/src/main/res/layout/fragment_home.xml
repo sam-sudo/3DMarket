@@ -16,6 +16,7 @@
         tools:context=".HomeFragment">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:background="?attr/backgroundColor"
             android:id="@+id/recyclerView"
             android:paddingBottom="50dp"
             android:layout_width="match_parent"

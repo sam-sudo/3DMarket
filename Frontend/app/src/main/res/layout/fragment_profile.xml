@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <RelativeLayout
-                android:background="#F3B200"
+                android:background="?attr/colorPrimary"
                 android:padding="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="250dp">
@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <androidx.cardview.widget.CardView
-                    app:cardBackgroundColor="#F3B200"
+                    app:cardBackgroundColor="?attr/colorPrimary"
                     android:elevation="20dp"
                     android:layout_margin="10dp"
                     android:layout_width="0dp"
@@ -97,7 +97,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    app:cardBackgroundColor="#F3B200"
+                    app:cardBackgroundColor="?attr/colorPrimary"
                     android:elevation="10dp"
                     android:layout_margin="10dp"
                     android:layout_width="0dp"

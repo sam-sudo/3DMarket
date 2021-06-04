@@ -4,150 +4,192 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="50px"
-    android:layout_margin="3dp"
+    android:background="?attr/backgroundColor"
+
     android:orientation="vertical"
     tools:context=".Fragments.UploadFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <ScrollView
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:orientation="vertical">
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/previewImgReciclerView"
-            android:layout_weight="1"
-            android:layout_margin="3dp"
-            android:background="@drawable/border_recyclerview"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_marginBottom="50dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="120dp">
+            android:layout_height="match_parent">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <Button
-            android:id="@+id/selectImg"
-            android:text="Select images"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content">
-
-        </Button>
+                android:orientation="vertical">
 
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/previewImgReciclerView"
+                    android:layout_weight="1"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/border_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.recyclerview.widget.RecyclerView>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
+                <Button
+                    android:padding="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:background="?attr/colorButtonNormal"
+                    android:id="@+id/selectImg"
+                    android:text="Selecciona las imágenes"
+                    android:layout_width="210dp"
+                    android:layout_height="wrap_content">
 
-
-
-        <Button
-            android:id="@+id/selectFile"
-            android:text="Select 3D objet file"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content">
-
-        </Button>
-
-        <TextView
-            android:id="@+id/previewObjetText"
-            android:hint="Name of file"
-            android:maxLines="1"
-            android:textStyle="bold"
-            android:textColor="#2CBD12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </TextView>
+                </Button>
 
 
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:orientation="vertical">
-
-        <TextView
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:text="Name:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </TextView>
-
-        <EditText
-            android:id="@+id/editName"
-            android:hint="Write name here"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </EditText>
-
-        <TextView
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:text="Price:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </TextView>
-
-        <EditText
-            android:id="@+id/editPrice"
-            android:hint="Write price here"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </EditText>
-
-        <TextView
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:text="Description:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </TextView>
-
-        <EditText
-            android:id="@+id/editDescription"
-            android:hint="Write description here"
-            android:minLines="5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </EditText>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
 
 
+                <Button
+                    android:padding="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:background="?attr/colorButtonNormal"
+                    android:id="@+id/selectFile"
+                    android:text="Selecciona el fichero 3D"
+                    android:layout_width="210dp"
+                    android:layout_height="wrap_content">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+                </Button>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="wrap_content">
+                <TextView
 
-        <Button
-            android:id="@+id/upFiles"
-            android:text="UP"
-            android:enabled="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/previewObjetText"
+                    android:hint="Nombre del fichero"
+                    android:maxLines="1"
+                    android:textStyle="bold"
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        </Button>
+                </TextView>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:textStyle="bold"
+                    android:text="Nombre:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <EditText
+                    android:textColorHint="?attr/android:textColorPrimary"
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/editName"
+                    android:hint="Nombre del producto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </EditText>
+
+                <TextView
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    android:text="Precio:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <EditText
+                    android:textColorHint="?attr/android:textColorPrimary"
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/editPrice"
+                    android:hint="Precio del producto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </EditText>
+
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:textStyle="bold"
+                    android:text="Descripción:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <EditText
+                    android:textColorHint="?attr/android:textColorPrimary"
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/editDescription"
+                    android:hint="Descripción del producto"
+                    android:minLines="5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </EditText>
+
+
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:textColor="@color/white"
+                    android:background="?attr/colorButtonNormal"
+                    android:id="@+id/upFiles"
+                    android:text="Subir"
+                    android:enabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </Button>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

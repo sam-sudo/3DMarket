@@ -18,13 +18,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/menu_bg"
-        app:cnb_iconColor="#FF0000"
         android:elevation="10dp"
-        app:cnb_menuResource="@menu/bottom_nav_menu"
         app:cnb_orientationMode="horizontal"
         app:cnb_radius="40dp"
-        app:cnb_badgeColor="#FF0000"
-        app:cnb_unselectedColor="@color/white" />
+        app:cnb_unselectedColor="?attr/colorSecondary" />
 
 </RelativeLayout>

@@ -1,6 +1,8 @@
 package com.example.a3dmarket.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +61,8 @@ public class LoginTabFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
 
+        cargarPreferencias();
+
         mButtonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +70,7 @@ public class LoginTabFragment extends Fragment {
                 password = mEditTexPassword.getText().toString();
 
                 if (!email.isEmpty() && !password.isEmpty()){
+                    guardarPreferencias();
                     loginUser();
                 }else {
                     Toast.makeText(getContext(), "Debe completar los campos", Toast.LENGTH_SHORT).show();
@@ -104,6 +109,26 @@ public class LoginTabFragment extends Fragment {
 
 
         return root;
+    }
+
+    private void guardarPreferencias(){
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putString("email", email);
+        editor.putString("password", password);
+
+        editor.commit();
+    }
+
+    private void cargarPreferencias(){
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        String user = preferences.getString("email", "");
+        String contraseña = preferences.getString("password", "");
+
+        mEditTexEmail.setText(user);
+        mEditTexPassword.setText(contraseña);
+
     }
 
     private void loginUser(){

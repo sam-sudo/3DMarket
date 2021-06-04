@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="TEMA DE LA APLICACIÓN"
+        >
+        <ListPreference android:title="Seleccionar tema"
+            android:key="tema"
+            android:summary="Selecciona el tema para tu aplicación"
+            android:entries="@array/tema"
+            android:entryValues="@array/tema"
+            android:icon="@drawable/ic_baseline_adjust_24">
+
+        </ListPreference>
+    </PreferenceCategory>
+
+</PreferenceScreen>
