@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Day -->
+    <style name="AppThemeDay" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#F3B200</item>
+        <item name="colorSecondary">#FFFFFF</item>
+        <item name="backgroundColor">#FFFFFF</item>
+        <item name="android:textColorPrimary">#000000</item>
+        <item name="android:textColorSecondary">#FFFFFF</item>
+        <item name="android:textColorTertiary">#000000</item>
+        <item name="menu">@drawable/menu_bg</item>
+        <item name="colorButtonNormal">@drawable/button_bg</item>
+    </style>
+
+    <!--Dark -->
+    <style name="AppThemeDark" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#000000</item>
+        <item name="colorSecondary">#9C27B0</item>
+        <item name="backgroundColor">#4A4A4A</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorSecondary">#B8B8B8</item>
+        <item name="android:textColorTertiary">#B8B8B8</item>
+        <item name="menu">@drawable/menu_bg_dark</item>
+        <item name="colorButtonNormal">@drawable/button_bg_dark</item>
+    </style>
+
+</resources>

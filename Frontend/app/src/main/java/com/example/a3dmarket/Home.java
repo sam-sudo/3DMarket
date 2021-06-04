@@ -1,9 +1,12 @@
 package com.example.a3dmarket;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
@@ -18,16 +21,33 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 public class Home extends AppCompatActivity {
     ChipNavigationBar chipNavigationBar;
+    SharedPref sharedPref;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         chipNavigationBar = (ChipNavigationBar)findViewById(R.id.chip_bottom_nav);
+
+        sharedPref = new SharedPref(this);
+        chipNavigationBar.setItemSelected(R.id.home, true);
+
+        if (sharedPref.loadNightModeState() == true){
+            setTheme(R.style.AppThemeDark);
+            chipNavigationBar.setBackground(getDrawable(R.drawable.menu_bg_dark));
+            chipNavigationBar.setMenuResource(R.menu.bottom_nav_menu_dark);
+
+
+        }else{
+            setTheme(R.style.AppThemeDay);
+            chipNavigationBar.setBackground(getDrawable(R.drawable.menu_bg));
+            chipNavigationBar.setMenuResource(R.menu.bottom_nav_menu);
+        }
+
+
         chipNavigationBar.setItemEnabled(R.id.nav_home, true);
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new HomeFragment()).commit();
-        chipNavigationBar.showBadge(R.id.home);
         if (chipNavigationBar.isExpanded()){
             chipNavigationBar.showBadge(R.id.home, 2);
         }
