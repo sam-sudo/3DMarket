@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config xmlns:tools="http://schemas.android.com/tools">
     <domain-config cleartextTrafficPermitted="true" >
-<<<<<<< HEAD
-        <domain includeSubdomains="true">192.168.232.2</domain> <!--For emulator-->
-        <domain includeSubdomains="true">192.168.1.19</domain><!--For real device, get your ip from pc-->
-=======
         <domain includeSubdomains="true">10.0.2.16</domain> <!--For emulator-->
         <domain includeSubdomains="true">192.168.1.138</domain><!--For real device, get your ip from pc-->
->>>>>>> Email_With_Stripe
     </domain-config>
 </network-security-config>
