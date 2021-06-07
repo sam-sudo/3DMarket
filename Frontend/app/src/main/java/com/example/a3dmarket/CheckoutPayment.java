@@ -1,11 +1,16 @@
 package com.example.a3dmarket;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 
 import android.content.Intent;
 
+<<<<<<< HEAD
 import android.graphics.Color;
+=======
+import android.net.Uri;
+>>>>>>> Email_With_Stripe
 import android.os.Bundle;
 
 import android.util.Log;
@@ -14,6 +19,8 @@ import android.view.View;
 
 import android.widget.Button;
 
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,14 +33,17 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
+import com.google.firebase.database.annotations.NotNull;
 import com.google.gson.Gson;
 
 import com.google.gson.GsonBuilder;
 
 import com.google.gson.reflect.TypeToken;
 
+import com.squareup.picasso.Picasso;
 import com.stripe.android.ApiResultCallback;
 
+import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.PaymentIntentResult;
 
 import com.stripe.android.Stripe;
@@ -44,7 +54,12 @@ import com.stripe.android.model.PaymentIntent;
 
 import com.stripe.android.model.PaymentMethodCreateParams;
 
+import com.stripe.android.paymentsheet.PaymentSheet;
+import com.stripe.android.paymentsheet.PaymentSheetResult;
 import com.stripe.android.view.CardInputWidget;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -58,6 +73,7 @@ import java.util.List;
 import java.util.Map;
 
 import java.util.Objects;
+import java.util.zip.Inflater;
 
 import okhttp3.Call;
 
@@ -72,6 +88,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class CheckoutPayment extends AppCompatActivity {
 
@@ -79,7 +96,11 @@ public class CheckoutPayment extends AppCompatActivity {
 
     // 10.0.2.2 is the Android emulator's alias to localhost
     // 192.168.1.6 If you are testing in real device with usb connected to same network then use your IP address
+<<<<<<< HEAD
     private static final String BACKEND_URL = "http://192.168.1.19:4242/"; //4242 is port mentioned in server i.e index.js
+=======
+    private static final String BACKEND_URL = "http://192.168.1.138:4242/"; //4242 is port mentioned in server i.e index.js
+>>>>>>> Email_With_Stripe
     TextView amountText;
     CardInputWidget cardInputWidget;
     Button payButton;
@@ -88,6 +109,8 @@ public class CheckoutPayment extends AppCompatActivity {
     private String paymentIntentClientSecret;
     //declare stripe
     private Stripe stripe;
+
+
 
     Double amountDouble=null;
 
@@ -98,6 +121,7 @@ public class CheckoutPayment extends AppCompatActivity {
     static ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_payment);
 
@@ -112,6 +136,7 @@ public class CheckoutPayment extends AppCompatActivity {
         progressDialog.setCancelable(false);
         httpClient = new OkHttpClient();
 
+<<<<<<< HEAD
         if (sharedPref.loadNightModeState() == true){
             setTheme(R.style.AppThemeDark);
             layout.setBackgroundColor(Color.parseColor("#4A4A4A"));
@@ -124,6 +149,19 @@ public class CheckoutPayment extends AppCompatActivity {
             layout.setBackgroundColor(Color.parseColor("#FFFFFF"));
             cardInputWidget.setBackgroundColor(Color.parseColor("#F3B200"));
         }
+=======
+        TextView titulo = findViewById(R.id.titleEdit);
+        TextView coste = findViewById(R.id.pricePay);
+        ImageView img = findViewById(R.id.imgToPay);
+
+        Bundle extras = getIntent().getExtras();
+
+        titulo.setText(extras.getString("name"));
+        coste.setText(extras.getString("price"));
+        Picasso.get().load((Uri) extras.get("img")).into(img);
+
+
+>>>>>>> Email_With_Stripe
 
         //Initialize
         stripe = new Stripe(
@@ -160,8 +198,9 @@ public class CheckoutPayment extends AppCompatActivity {
             Map<String,Object> itemMap=new HashMap<>();
             List<Map<String,Object>> itemList =new ArrayList<>();
             payMap.put("currency","usd");
-            itemMap.put("id","photo_subscription");
+            itemMap.put("id","objet__3D");
             itemMap.put("amount",amount);
+            itemMap.put("receipt_email","samuelhueso19@gmail.com");
             itemList.add(itemMap);
             payMap.put("items",itemList);
             String json = new Gson().toJson(payMap);
@@ -191,7 +230,7 @@ public class CheckoutPayment extends AppCompatActivity {
             }
             activity.runOnUiThread(() ->
                     Toast.makeText(
-                            activity, "Error: " + e.toString(), Toast.LENGTH_LONG
+                            activity, "Error: Server down" , Toast.LENGTH_LONG
                     ).show()
             );
         }
@@ -205,7 +244,7 @@ public class CheckoutPayment extends AppCompatActivity {
             if (!response.isSuccessful()) {
                 activity.runOnUiThread(() ->
                         Toast.makeText(
-                                activity, "Error: " + response.toString(), Toast.LENGTH_LONG
+                                activity, "Error: Server is down" , Toast.LENGTH_LONG
                         ).show()
                 );
             } else {
@@ -266,6 +305,11 @@ public class CheckoutPayment extends AppCompatActivity {
                 Toast toast =Toast.makeText(activity, "Ordered Successful", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
+
+                Intent intent = new Intent(getApplicationContext(),Home.class);
+                startActivity(intent);
+
+
             } else if (status == PaymentIntent.Status.RequiresPaymentMethod) {
                 // Payment failed – allow retrying using a different payment method
                 activity.displayAlert(
@@ -295,3 +339,4 @@ public class CheckoutPayment extends AppCompatActivity {
         builder.create().show();
     }
 }
+
