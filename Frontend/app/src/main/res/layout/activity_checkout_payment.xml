@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundColor"
+    android:id="@+id/layout_pago"
     android:orientation="vertical">
 
     <ImageView
@@ -16,6 +17,7 @@
     </ImageView>
 
     <TextView
+        android:textColor="?attr/android:textColorPrimary"
         android:id="@+id/pricePay"
         android:text="25.20"
         android:layout_gravity="center"

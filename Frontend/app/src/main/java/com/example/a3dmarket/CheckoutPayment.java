@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 
 import android.content.Intent;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -23,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 
 import com.google.gson.Gson;
 
@@ -73,6 +75,8 @@ import okhttp3.Response;
 
 public class CheckoutPayment extends AppCompatActivity {
 
+    SharedPref sharedPref;
+
     // 10.0.2.2 is the Android emulator's alias to localhost
     // 192.168.1.6 If you are testing in real device with usb connected to same network then use your IP address
     private static final String BACKEND_URL = "http://192.168.1.19:4242/"; //4242 is port mentioned in server i.e index.js
@@ -87,6 +91,8 @@ public class CheckoutPayment extends AppCompatActivity {
 
     Double amountDouble=null;
 
+    LinearLayoutCompat layout;
+
     private OkHttpClient httpClient;
 
     static ProgressDialog progressDialog;
@@ -95,6 +101,9 @@ public class CheckoutPayment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_payment);
 
+        sharedPref = new SharedPref(this);
+        layout = (LinearLayoutCompat)findViewById(R.id.layout_pago);
+
         amountText = findViewById(R.id.pricePay);
         cardInputWidget = findViewById(R.id.stripeInputPay);
         payButton = findViewById(R.id.payButton);
@@ -102,6 +111,19 @@ public class CheckoutPayment extends AppCompatActivity {
         progressDialog.setTitle("Transaction in progress");
         progressDialog.setCancelable(false);
         httpClient = new OkHttpClient();
+
+        if (sharedPref.loadNightModeState() == true){
+            setTheme(R.style.AppThemeDark);
+            layout.setBackgroundColor(Color.parseColor("#4A4A4A"));
+            amountText.setTextColor(Color.parseColor("#FFFFFF"));
+            payButton.setBackground(getDrawable(R.drawable.button_bg_dark));
+            cardInputWidget.setBackgroundColor(Color.parseColor("#4A4A4A"));
+
+        }else{
+            setTheme(R.style.AppThemeDay);
+            layout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            cardInputWidget.setBackgroundColor(Color.parseColor("#F3B200"));
+        }
 
         //Initialize
         stripe = new Stripe(
