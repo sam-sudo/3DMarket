@@ -77,6 +77,7 @@ public class ItemDetail extends AppCompatActivity {
 
 
 
+
         RecyclerView recyclerView = this.findViewById(R.id.previewImgReciclerViewDetail);
 
         LinearLayoutManager horizontalLayoutManager
@@ -98,6 +99,9 @@ public class ItemDetail extends AppCompatActivity {
             public void onClick(View view) {
                 //downloadAfterPay();
                 Intent intent = new Intent(ItemDetail.this, CheckoutPayment.class);
+                intent.putExtra("name",name.getText());
+                intent.putExtra("price",price.getText());
+                intent.putExtra("img", imgUriList.get(0));
                 view.getContext().startActivity(intent);
             }
         });
