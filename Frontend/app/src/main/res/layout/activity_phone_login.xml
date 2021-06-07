@@ -24,6 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:textColor="#000000"
+                android:textColorHint="#B8B8B8"
                 android:layout_marginRight="5dp"
                 android:padding="15dp"
                 android:textAlignment="center"
@@ -36,6 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
             <EditText
+                android:textColor="#000000"
+                android:textColorHint="#B8B8B8"
                 android:layout_marginLeft="5dp"
                 android:padding="15dp"
                 android:layout_weight="1"

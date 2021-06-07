@@ -37,7 +37,9 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".CheckoutPayment">
+        <activity
+            android:theme="@style/AppThemeDay"
+            android:name=".CheckoutPayment">
 
         </activity>
     </application>

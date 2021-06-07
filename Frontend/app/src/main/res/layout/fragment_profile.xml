@@ -20,12 +20,6 @@
                 android:padding="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="250dp">
-                <ImageView
-                    android:id="@+id/profile_image"
-                    android:layout_centerVertical="true"
-                    android:src="@mipmap/ic_launcher"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"></ImageView>
 
                 <TextView
                     android:textColor="@color/white"
@@ -35,7 +29,6 @@
                     android:layout_height="wrap_content"
                     android:text="Nombre y apellidos"
                     android:textSize="20sp"
-                    android:layout_toRightOf="@+id/profile_image"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="30dp"></TextView>
 
@@ -45,164 +38,23 @@
                     android:layout_height="wrap_content"
                     android:text="email"
                     android:textSize="14sp"
-                    android:layout_toRightOf="@+id/profile_image"
                     android:layout_below="@+id/name_profile"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="30dp"></TextView>
             </RelativeLayout>
 
-            <LinearLayout
-                android:layout_marginTop="-80dp"
-                android:padding="20dp"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <androidx.cardview.widget.CardView
-                    app:cardBackgroundColor="?attr/colorPrimary"
-                    android:elevation="20dp"
-                    android:layout_margin="10dp"
-                    android:layout_width="0dp"
-                    android:layout_height="125dp"
-                    android:layout_weight="1">
-                    <RelativeLayout
-                        android:padding="5dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <ImageView
-                            android:layout_marginTop="10dp"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/carrito"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"></ImageView>
-                        <TextView
-                            android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:id="@+id/payment_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Compras"
-                            android:textSize="20sp"
-                            android:layout_centerInParent="true"></TextView>
-
-                        <TextView
-                            android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:id="@+id/payment_desc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="100"
-                            android:textSize="15sp"
-                            android:layout_below="@id/payment_label"
-                            android:layout_centerHorizontal="true"></TextView>
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    app:cardBackgroundColor="?attr/colorPrimary"
-                    android:elevation="10dp"
-                    android:layout_margin="10dp"
-                    android:layout_width="0dp"
-                    android:layout_height="125dp"
-                    android:layout_weight="1">
-                    <RelativeLayout
-                        android:padding="5dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <ImageView
-                            android:layout_marginTop="10dp"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/ventas"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"></ImageView>
-                        <TextView
-                            android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:id="@+id/payment_label1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Ventas"
-                            android:textSize="20sp"
-                            android:layout_centerInParent="true"></TextView>
-
-                        <TextView
-                            android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:id="@+id/payment_desc1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="35"
-                            android:textSize="14sp"
-                            android:layout_below="@id/payment_label1"
-                            android:layout_centerHorizontal="true"></TextView>
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:padding="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginBottom="10dp"
-                    android:hint="Nombre"
+                android:layout_height="match_parent">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputEditText
-
+                    android:layout_height="match_parent">
+                    <ListView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:drawableLeft="@drawable/ic_baseline_person_24"
-                        android:text="Adrian Avila Torres">
+                        android:layout_height="match_parent"></ListView>
+                </LinearLayout>
+            </ScrollView>
 
-                    </com.google.android.material.textfield.TextInputEditText>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginBottom="10dp"
-                    android:hint="Email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:drawableLeft="@drawable/ic_baseline_person_24"
-                        android:text="adrianavilatorres@gmail.com">
-
-                    </com.google.android.material.textfield.TextInputEditText>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginBottom="10dp"
-                    android:hint="Teléfono"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:drawableLeft="@drawable/ic_baseline_person_24"
-                        android:text="678 119 116">
-
-                    </com.google.android.material.textfield.TextInputEditText>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginBottom="10dp"
-                    android:hint="Contraseña"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:drawableLeft="@drawable/ic_baseline_person_24"
-                        android:text="adrian123">
-
-                    </com.google.android.material.textfield.TextInputEditText>
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

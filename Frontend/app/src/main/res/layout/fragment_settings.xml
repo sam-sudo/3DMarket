@@ -10,10 +10,15 @@
 
         <LinearLayout
             android:padding="10dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <TextView
+                android:textColor="?attr/android:textColorPrimary"
                 android:text="Habilitar Modo oscuro"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
@@ -21,16 +26,91 @@
 
 
             <CheckBox
+                android:gravity="center"
+                android:buttonTint="#FF0000"
                 android:id="@+id/mySwitch"
                 android:text="Modo oscuro"
-                android:textColor="?attr/android:textColorTertiary"
+                android:textColor="?attr/android:textColorPrimary"
                 android:layout_marginTop="8dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"></CheckBox>
 
+            <View
+                android:background="#000000"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"></View>
 
 
 
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textColor="?attr/android:textColorPrimary"
+                android:text="Cerrar sesión"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+
+            <Button
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:background="?attr/colorButtonNormal"
+                android:id="@+id/singout"
+                android:text="Cerrar sesión"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></Button>
+
+            <View
+                android:background="#000000"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"></View>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textColor="?attr/android:textColorPrimary"
+                android:text="Cambiar contraseña"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+
+            <Button
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:background="?attr/colorButtonNormal"
+                android:text="Cambiar contraseña"
+                android:id="@+id/reseet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></Button>
+
+            <View
+                android:background="#000000"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"></View>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textColor="?attr/android:textColorPrimary"
+                android:text="Créditos"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+
+            <Button
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:background="?attr/colorButtonNormal"
+                android:text="ver créditos"
+                android:id="@+id/credits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></Button>
 
         </LinearLayout>
 

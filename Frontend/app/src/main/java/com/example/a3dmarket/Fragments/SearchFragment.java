@@ -1,5 +1,6 @@
 package com.example.a3dmarket.Fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.example.a3dmarket.Adapters.ItemAdapter;
 import com.example.a3dmarket.Item;
 import com.example.a3dmarket.R;
+import com.example.a3dmarket.SharedPref;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -39,6 +41,8 @@ import java.util.Map;
  * create an instance of this fragment.
  */
 public class SearchFragment extends Fragment {
+
+    SharedPref sharedPref;
 
 
     FirebaseFirestore db    = FirebaseFirestore.getInstance();
@@ -79,6 +83,15 @@ public class SearchFragment extends Fragment {
         refreshLayout = view.findViewById(R.id.refreshLayout);
         searchView =  view.findViewById(R.id.searchView);
         itemRecyclerView.setAdapter(adapter);
+
+        sharedPref = new SharedPref(getContext());
+
+        if (sharedPref.loadNightModeState() == true){
+            getActivity().setTheme(R.style.AppThemeDark);
+
+        }else{
+            getActivity().setTheme(R.style.AppThemeDay);
+        }
 
         //Pinterest efect grid
         itemRecyclerView.setLayoutManager(

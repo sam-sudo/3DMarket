@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="50px"
+
     android:background="?attr/backgroundColor"
 
     android:orientation="vertical"
@@ -12,7 +12,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <ScrollView
-
+        android:layout_marginBottom="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -111,9 +111,11 @@
                 </TextView>
 
                 <EditText
+                    android:layout_marginBottom="40dp"
                     android:textColorHint="?attr/android:textColorPrimary"
                     android:textColor="?attr/android:textColorPrimary"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:id="@+id/editName"
                     android:hint="Nombre del producto"
                     android:layout_width="match_parent"
@@ -132,6 +134,8 @@
                 </TextView>
 
                 <EditText
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="40dp"
                     android:textColorHint="?attr/android:textColorPrimary"
                     android:textColor="?attr/android:textColorPrimary"
                     android:layout_marginLeft="10dp"
@@ -153,6 +157,7 @@
                 </TextView>
 
                 <EditText
+                    android:layout_marginRight="10dp"
                     android:textColorHint="?attr/android:textColorPrimary"
                     android:textColor="?attr/android:textColorPrimary"
                     android:layout_marginLeft="10dp"

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.DownloadManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a3dmarket.Adapters.Preview_Items_ImgAdapter;
 import com.example.a3dmarket.CheckoutPayment;
 import com.example.a3dmarket.R;
+import com.example.a3dmarket.SharedPref;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -34,9 +37,10 @@ import java.util.zip.Inflater;
 
 public class ItemDetail extends AppCompatActivity {
 
-
+    SharedPref sharedPref;
     Button compraButton;
     String getUrl = "";
+    LinearLayoutCompat layout;
 
     private Preview_Items_ImgAdapter preview_items_imgAdapter;
 
@@ -47,14 +51,32 @@ public class ItemDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.itemdetail);
 
+        layout = (LinearLayoutCompat)findViewById(R.id.layoutItem);
+
+        sharedPref = new SharedPref(this);
+
 
 
         TextView  name  = findViewById(R.id.name);
+        TextView  desc  = findViewById(R.id.desc);
         TextView  price = findViewById(R.id.price);
         TextView  description = findViewById(R.id.description);
         ImageView img   = findViewById(R.id.img);
 
         compraButton = (Button) findViewById(R.id.compraButton);
+
+        if (sharedPref.loadNightModeState() == true){
+            setTheme(R.style.AppThemeDark);
+            layout.setBackgroundColor(Color.parseColor("#4A4A4A"));
+            name.setTextColor(Color.parseColor("#FFFFFF"));
+            price.setTextColor(Color.parseColor("#FFFFFF"));
+            description.setTextColor(Color.parseColor("#FFFFFF"));
+            desc.setTextColor(Color.parseColor("#FFFFFF"));
+            compraButton.setBackground(getDrawable(R.drawable.button_bg_dark));
+        }else{
+            setTheme(R.style.AppThemeDay);
+            layout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        }
 
         Bundle extras = getIntent().getExtras();
 

@@ -31,18 +31,20 @@ public class Home extends AppCompatActivity {
         chipNavigationBar = (ChipNavigationBar)findViewById(R.id.chip_bottom_nav);
 
         sharedPref = new SharedPref(this);
-        chipNavigationBar.setItemSelected(R.id.home, true);
+
 
         if (sharedPref.loadNightModeState() == true){
             setTheme(R.style.AppThemeDark);
             chipNavigationBar.setBackground(getDrawable(R.drawable.menu_bg_dark));
             chipNavigationBar.setMenuResource(R.menu.bottom_nav_menu_dark);
+            chipNavigationBar.setItemSelected(R.id.home, true);
 
 
         }else{
             setTheme(R.style.AppThemeDay);
             chipNavigationBar.setBackground(getDrawable(R.drawable.menu_bg));
             chipNavigationBar.setMenuResource(R.menu.bottom_nav_menu);
+            chipNavigationBar.setItemSelected(R.id.home, true);
         }
 
 

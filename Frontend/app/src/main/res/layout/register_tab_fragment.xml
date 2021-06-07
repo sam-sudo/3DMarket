@@ -7,6 +7,8 @@
     android:layout_height="match_parent">
 
     <EditText
+        android:textColor="#000000"
+        android:textColorHint="#B8B8B8"
         android:id="@+id/name_register"
         android:background="@drawable/edit_text_bg"
         android:layout_marginLeft="20dp"
@@ -19,6 +21,8 @@
         android:layout_height="wrap_content"></EditText>
 
     <EditText
+        android:textColor="#000000"
+        android:textColorHint="#B8B8B8"
         android:id="@+id/email_register"
         android:background="@drawable/edit_text_bg"
         android:layout_marginLeft="20dp"
@@ -30,6 +34,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></EditText>
     <EditText
+        android:textColor="#000000"
+        android:textColorHint="#B8B8B8"
         android:id="@+id/password_register"
         android:background="@drawable/edit_text_bg"
         android:layout_marginLeft="20dp"
@@ -42,6 +48,8 @@
         android:layout_height="wrap_content"></EditText>
 
     <EditText
+        android:textColor="#000000"
+        android:textColorHint="#B8B8B8"
         android:id="@+id/repeat_password"
         android:background="@drawable/edit_text_bg"
         android:layout_marginLeft="20dp"

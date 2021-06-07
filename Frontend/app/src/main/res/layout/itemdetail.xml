@@ -2,6 +2,7 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutItem"
     android:orientation="vertical"
     android:layout_height="match_parent">
 
@@ -39,7 +40,7 @@
        android:layout_marginBottom="30dp"
        android:textSize="35dp"
        android:textAlignment="center"
-       android:textColor="#000000"
+       android:textColor="?attr/android:textColorPrimary"
        android:id="@+id/name"
        android:text="name"
        android:layout_width="match_parent"
@@ -47,6 +48,8 @@
    </TextView>
 
    <TextView
+       android:id="@+id/desc"
+       android:textColor="?attr/android:textColorPrimary"
        android:padding="10dp"
        android:layout_marginLeft="20dp"
        android:text="Descripción:"
@@ -54,14 +57,13 @@
        android:layout_height="wrap_content"></TextView>
 
    <TextView
-
+       android:textColor="?attr/android:textColorPrimary"
        android:padding="10dp"
        android:layout_marginTop="10dp"
        android:layout_marginLeft="20dp"
        android:layout_marginRight="20dp"
        android:layout_marginBottom="10dp"
        android:textSize="20dp"
-       android:textColor="#000000"
        android:id="@+id/description"
        android:text="Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. "
        android:layout_width="match_parent"
@@ -77,56 +79,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-
-     <com.google.android.material.chip.Chip
-         android:theme="@style/Theme.MaterialComponents.Light"
-         android:padding="10dp"
-         android:text=".stl"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"></com.google.android.material.chip.Chip>
-
-     <com.google.android.material.chip.Chip
-         android:theme="@style/Theme.MaterialComponents.Light"
-         android:padding="10dp"
-         android:text=".stl"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"></com.google.android.material.chip.Chip>
-
-
-     <com.google.android.material.chip.Chip
-         android:theme="@style/Theme.MaterialComponents.Light"
-         android:padding="10dp"
-         android:text=".stl"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"></com.google.android.material.chip.Chip>
-
-     <com.google.android.material.chip.Chip
-         android:theme="@style/Theme.MaterialComponents.Light"
-         android:padding="10dp"
-         android:text=".stl"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"></com.google.android.material.chip.Chip>
-
-     <com.google.android.material.chip.Chip
-         android:theme="@style/Theme.MaterialComponents.Light"
-         android:padding="10dp"
-         android:text=".stl"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"></com.google.android.material.chip.Chip>
-
-     <com.google.android.material.chip.Chip
-         android:theme="@style/Theme.MaterialComponents.Light"
-         android:padding="10dp"
-         android:text=".stl"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"></com.google.android.material.chip.Chip>
-
-     <com.google.android.material.chip.Chip
-         android:theme="@style/Theme.MaterialComponents.Light"
-         android:padding="10dp"
-         android:text=".stl"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"></com.google.android.material.chip.Chip>
 
      <com.google.android.material.chip.Chip
          android:theme="@style/Theme.MaterialComponents.Light"
@@ -155,7 +107,7 @@
         android:id="@+id/compraButton"
         android:layout_marginRight="1dp"
         android:textColor="@color/white"
-        android:background="@drawable/button_bg"
+        android:background="?attr/colorButtonNormal"
         android:text="Comprar"
         android:layout_weight="8"
         android:layout_width="wrap_content"
@@ -170,7 +122,7 @@
         android:background="@drawable/edit_text_bg"
         android:layout_weight="2"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="?attr/android:textColorPrimary"
         android:id="@+id/price"
         android:text="price"
         android:textSize="20dp"
