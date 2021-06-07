@@ -10,13 +10,28 @@ public class Item {
     private String name;
     private String price;
     private String description;
+    private String author;
+    private String dateSale;
 
-    public Item(ArrayList<String> imgList, String fileUrl,String name, String price, String description) {
+    @Override
+    public String toString() {
+        return "Item{" +
+                "imgList=" + imgList +
+                ", fileUrl='" + fileUrl + '\'' +
+                ", name='" + name + '\'' +
+                ", price='" + price + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    public Item(ArrayList<String> imgList, String fileUrl, String name, String price, String description, String author) {
         this.imgList = imgList;
         this.fileUrl = fileUrl;
         this.name = name;
         this.price = price;
         this.description = description;
+        this.author = author;
+        this.dateSale = "";
     }
 
     /*public Item(String img) {
@@ -62,6 +77,19 @@ public class Item {
     public void setFileUrl(String fileUrl) {
         this.fileUrl = fileUrl;
     }
+    public String getDateSale() {
+        return dateSale;
+    }
 
+    public void setDateSale(String dateSale) {
+        this.dateSale = dateSale;
+    }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 }

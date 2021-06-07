@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +26,12 @@ import android.widget.Toast;
 import com.example.a3dmarket.Adapters.Preview_Items_ImgAdapter;
 import com.example.a3dmarket.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -57,6 +64,9 @@ public class UploadFragment extends Fragment {
     ArrayList<Uri> previewImgList;
     String fileName;
     String imgName;
+    String userEmail;
+    String id;
+
 
     Context context ;
 
@@ -67,6 +77,10 @@ public class UploadFragment extends Fragment {
 
     //DATABASE FIREBASE
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseAuth mAuth;
+    DatabaseReference mDatabase;
+
+
 
     private int VALOR_RETORNO = 1;
     //STORAGE FIREBASE
@@ -98,10 +112,32 @@ public class UploadFragment extends Fragment {
         editPrice = view.findViewById(R.id.editPrice);
         editDescription = view.findViewById(R.id.editDescription);
 
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        id = mAuth.getUid();
+
 
         previewImgList = new ArrayList();
 
 
+
+        mDatabase.child("Users").child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    userEmail = snapshot.child("email").getValue().toString();
+
+                }else{
+                    Toast.makeText(getContext(), "TOAAS", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
 
@@ -300,6 +336,7 @@ public class UploadFragment extends Fragment {
                         objetToSendToFirebase.put("price", editPrice.getText().toString());
                         objetToSendToFirebase.put("description", editDescription.getText().toString());
                         objetToSendToFirebase.put("urlFile", uri.toString());
+                        objetToSendToFirebase.put("author", userEmail);
                         //objetToSendToFirebase.put("imgList", uriArr);
 
 
@@ -367,57 +404,6 @@ public class UploadFragment extends Fragment {
 
 
 
-
-        /*imagesRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Log.d("TAG", "onSuccess: upaloaded img");
-
-                //------SUBIR DATOS A FIRESTORE DATABSE-----
-
-                imagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-
-                        fileRef.putFile(file3d).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-
-
-                                Map<String, Object> objetToSendToFirebase = new HashMap<>();
-
-                                objetToSendToFirebase.put("name", editName.getText().toString());
-                                objetToSendToFirebase.put("price", editPrice.getText().toString());
-                                objetToSendToFirebase.put("description", editDescription.getText().toString());
-                                objetToSendToFirebase.put("urlFile", uri.toString());
-
-
-
-                                for (int i = 0; i < uriArr.size() ; i++) {
-                                    objetToSendToFirebase.put("urlImg"+i, uriArr.get(i).toString());
-                                }
-
-                                db.collection("items").add(objetToSendToFirebase).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                    @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        Log.d("TAG", "UpFilesToFirebase: DONEE!!!");
-                                        previewImgList.clear();
-                                    }
-                                });
-
-
-                            }
-                        });
-
-
-                    }
-                });
-
-
-
-            }
-        });*/
 
 
 
