@@ -6,11 +6,8 @@ import android.content.DialogInterface;
 
 import android.content.Intent;
 
-<<<<<<< HEAD
 import android.graphics.Color;
-=======
 import android.net.Uri;
->>>>>>> Email_With_Stripe
 import android.os.Bundle;
 
 import android.util.Log;
@@ -96,11 +93,8 @@ public class CheckoutPayment extends AppCompatActivity {
 
     // 10.0.2.2 is the Android emulator's alias to localhost
     // 192.168.1.6 If you are testing in real device with usb connected to same network then use your IP address
-<<<<<<< HEAD
-    private static final String BACKEND_URL = "http://192.168.1.19:4242/"; //4242 is port mentioned in server i.e index.js
-=======
+
     private static final String BACKEND_URL = "http://192.168.1.138:4242/"; //4242 is port mentioned in server i.e index.js
->>>>>>> Email_With_Stripe
     TextView amountText;
     CardInputWidget cardInputWidget;
     Button payButton;
@@ -136,7 +130,6 @@ public class CheckoutPayment extends AppCompatActivity {
         progressDialog.setCancelable(false);
         httpClient = new OkHttpClient();
 
-<<<<<<< HEAD
         if (sharedPref.loadNightModeState() == true){
             setTheme(R.style.AppThemeDark);
             layout.setBackgroundColor(Color.parseColor("#4A4A4A"));
@@ -149,7 +142,7 @@ public class CheckoutPayment extends AppCompatActivity {
             layout.setBackgroundColor(Color.parseColor("#FFFFFF"));
             cardInputWidget.setBackgroundColor(Color.parseColor("#F3B200"));
         }
-=======
+
         TextView titulo = findViewById(R.id.titleEdit);
         TextView coste = findViewById(R.id.pricePay);
         ImageView img = findViewById(R.id.imgToPay);
@@ -161,7 +154,6 @@ public class CheckoutPayment extends AppCompatActivity {
         Picasso.get().load((Uri) extras.get("img")).into(img);
 
 
->>>>>>> Email_With_Stripe
 
         //Initialize
         stripe = new Stripe(

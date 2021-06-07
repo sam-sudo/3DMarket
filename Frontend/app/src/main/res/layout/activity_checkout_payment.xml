@@ -17,9 +17,7 @@
     </ImageView>
 
     <TextView
-<<<<<<< HEAD
         android:textColor="?attr/android:textColorPrimary"
-=======
         android:id="@+id/titleEdit"
         android:text="titulo"
         android:textSize="30dp"
@@ -31,7 +29,6 @@
     </TextView>
 
     <TextView
->>>>>>> Email_With_Stripe
         android:id="@+id/pricePay"
         android:text="0.50"
         android:layout_gravity="center"
