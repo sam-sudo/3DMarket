@@ -91,39 +91,15 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="80dp">
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:elevation="0dp"
-            app:borderWidth="0dp"
-            android:src="@drawable/facebook"
-            android:backgroundTint="@color/white"
-            android:id="@+id/fab_facebook"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></com.google.android.material.floatingactionbutton.FloatingActionButton>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:elevation="0dp"
-            app:borderWidth="0dp"
-            android:src="@drawable/google"
-            android:backgroundTint="@color/white"
-            android:id="@+id/fab_google"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></com.google.android.material.floatingactionbutton.FloatingActionButton>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:elevation="0dp"
-            app:borderWidth="0dp"
-            android:src="@drawable/ic_baseline_local_phone_24"
-            android:backgroundTint="@color/white"
-            android:id="@+id/fab_number"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></com.google.android.material.floatingactionbutton.FloatingActionButton>
-
+        <Button
+            android:id="@+id/noUser"
+            android:textColor="@color/white"
+            android:text="Iniciar sesión como invitado"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/button_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Button>
 
     </LinearLayout>
 

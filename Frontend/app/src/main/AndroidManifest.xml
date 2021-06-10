@@ -26,6 +26,14 @@
         <activity
             android:theme="@style/AppThemeDay"
             android:name=".Fragments.ItemDetail"/>
+
+        <activity
+            android:theme="@style/AppThemeDay"
+            android:name=".HomeNotUser"/>
+
+        <activity
+            android:theme="@style/AppThemeDay"
+            android:name=".Fragments.ItemDetailNotUser"/>
         <activity
             android:theme="@style/AppThemeDay"
             android:name=".Login"

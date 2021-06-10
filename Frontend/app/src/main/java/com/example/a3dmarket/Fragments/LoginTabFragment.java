@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.a3dmarket.Home;
+import com.example.a3dmarket.HomeNotUser;
 import com.example.a3dmarket.PhoneLogin;
 import com.example.a3dmarket.R;
 import com.example.a3dmarket.ResetPassword;
@@ -30,11 +31,7 @@ public class LoginTabFragment extends Fragment {
 
     EditText mEditTexEmail, mEditTexPassword;
     TextView reset;
-    Button   mButtonLogin;
-
-    FloatingActionButton fabGoogle;
-    FloatingActionButton fabFacebook;
-    FloatingActionButton fabPhone;
+    Button   mButtonLogin, mButtonLoginNotRegister;
 
 
     private String email    = "";
@@ -49,15 +46,12 @@ public class LoginTabFragment extends Fragment {
 
         ViewGroup root   = (ViewGroup) inflater.inflate(R.layout.login_tab_fragment, container, false);
 
-        mEditTexEmail        = (EditText)root.findViewById(R.id.email_login);
-        mEditTexPassword     = (EditText)root.findViewById(R.id.password_login);
-        mButtonLogin         = (Button)root.findViewById(R.id.login);
+        mEditTexEmail           = (EditText)root.findViewById(R.id.email_login);
+        mEditTexPassword        = (EditText)root.findViewById(R.id.password_login);
+        mButtonLogin            = (Button)root.findViewById(R.id.login);
+        mButtonLoginNotRegister = (Button)root.findViewById(R.id.noUser);
 
         reset = (TextView) root.findViewById(R.id.reset);
-
-        fabGoogle   = (FloatingActionButton)root.findViewById(R.id.fab_google);
-        fabFacebook = (FloatingActionButton)root.findViewById(R.id.fab_facebook);
-        fabPhone    = (FloatingActionButton)root.findViewById(R.id.fab_number);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -78,31 +72,20 @@ public class LoginTabFragment extends Fragment {
             }
         });
 
-        fabGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
-
-        fabFacebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        fabPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), PhoneLogin.class));
-            }
-        });
 
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), ResetPassword.class));
+            }
+        });
+
+        mButtonLoginNotRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), HomeNotUser.class));
+                getActivity().finish();
             }
         });
 

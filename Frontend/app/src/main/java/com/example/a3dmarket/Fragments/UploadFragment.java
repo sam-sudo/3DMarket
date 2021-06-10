@@ -103,16 +103,16 @@ public class UploadFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_upload, container, false);
 
 
-        btnSelectImg = view.findViewById(R.id.selectImg);
+        btnSelectImg  = view.findViewById(R.id.selectImg);
         btnSelectFile = view.findViewById(R.id.selectFile);
-        btnUp = view.findViewById(R.id.upFiles);
+        btnUp         = view.findViewById(R.id.upFiles);
 
-        editFileName = view.findViewById(R.id.previewObjetText);
-        editName = view.findViewById(R.id.editName);
-        editPrice = view.findViewById(R.id.editPrice);
+        editFileName    = view.findViewById(R.id.previewObjetText);
+        editName        = view.findViewById(R.id.editName);
+        editPrice       = view.findViewById(R.id.editPrice);
         editDescription = view.findViewById(R.id.editDescription);
 
-        mAuth = FirebaseAuth.getInstance();
+        mAuth     = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         id = mAuth.getUid();
@@ -145,18 +145,6 @@ public class UploadFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
-                /**
-                 * / : poder seleccionar todos los archivos
-                 * audio/* : solo seleccionar archivos de audio .mp3,.wav...
-                 * video/* : solo seleccionar archivos de video .mp4,.avi....
-                 * image/* : solo seleccionar archivos de imágen .jpg,.png....
-                 * text/plain : solo seleccionar archivos con texto plano.
-                 *
-                 * Con setType("video/*|image/*"); Con pipe puedes poner varios
-                 *
-                 */
-
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/*");
                 startActivityForResult(Intent.createChooser(intent, "Choose File"), VALOR_RETORNO);
@@ -169,17 +157,6 @@ public class UploadFragment extends Fragment {
         btnSelectFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /**
-                 * / : poder seleccionar todos los archivos
-                 * audio/* : solo seleccionar archivos de audio .mp3,.wav...
-                 * video/* : solo seleccionar archivos de video .mp4,.avi....
-                 * image/* : solo seleccionar archivos de imágen .jpg,.png....
-                 * text/plain : solo seleccionar archivos con texto plano.
-                 *
-                 * Con setType("video/*|image/*"); Con pipe puedes poner varios
-                 *
-                 */
 
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("application/vnd.ms-pki.stl");
@@ -231,6 +208,7 @@ public class UploadFragment extends Fragment {
 
 
      public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
          super.onActivityResult(requestCode, resultCode, data);
          Context context = getContext();
 
@@ -245,9 +223,6 @@ public class UploadFragment extends Fragment {
              }
 
               uri = data.getData();
-
-
-
 
              if(uri != null){
                  ContentResolver cr = context.getContentResolver();
@@ -264,8 +239,7 @@ public class UploadFragment extends Fragment {
 
                      RecyclerView recyclerView = getView().findViewById(R.id.previewImgReciclerView);
 
-                     LinearLayoutManager horizontalLayoutManager
-                             = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                     LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
 
                      recyclerView.setLayoutManager(horizontalLayoutManager);
 
@@ -282,15 +256,12 @@ public class UploadFragment extends Fragment {
                      file3d = uri;
                      fileName = getNameFromDrive(uri);
 
-
                      editFileName.setText(fileName);
                  }
 
                  if (uri != null && previewImgList.size() > 0) {
                      btnUp.setEnabled(true);
                  }
-
-
 
              }
          }

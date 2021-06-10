@@ -2,6 +2,7 @@ package com.example.a3dmarket.Adapters;
 
 import android.content.Context;
 import android.net.Uri;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,8 @@ public class Preview_Items_ImgAdapter extends RecyclerView.Adapter<Preview_Items
 
     }
 
+    ImageView imagen;
+
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,15 +52,17 @@ public class Preview_Items_ImgAdapter extends RecyclerView.Adapter<Preview_Items
         holder.setItemImg(previewImgList.get(position));
 
 
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-
-                
-
                 Log.d("TAG", "onClick: real" + position );
-               //Picasso.get().load(previewImgList.get(position)).into();
 
+
+
+
+               //Picasso.get().load(previewImgList.get(position)).into(imagen);
             }
         });
 

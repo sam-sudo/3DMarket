@@ -28,6 +28,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -48,8 +50,6 @@ public class ProfileFragment extends Fragment {
     FirebaseFirestore db    = FirebaseFirestore.getInstance();
 
     TextView name, email;
-
-
 
     ListView listView;
     ArrayList productList = new ArrayList();
@@ -89,6 +89,7 @@ public class ProfileFragment extends Fragment {
                     userEmail = snapshot.child("email").getValue().toString();
                     name.setText(snapshot.child("name").getValue().toString());
                     email.setText(snapshot.child("email").getValue().toString());
+                    getMyProducts();
                 }else{
                     Toast.makeText(getContext(), "TOAAS", Toast.LENGTH_SHORT).show();
                 }
@@ -101,7 +102,15 @@ public class ProfileFragment extends Fragment {
         });
 
 
-        db.collection("items").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+
+
+        return view;
+    }
+
+    @NotNull
+    private Task<QuerySnapshot> getMyProducts() {
+        return db.collection("items").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
@@ -144,13 +153,5 @@ public class ProfileFragment extends Fragment {
 
 
         });
-
-
-
-
-
-
-
-        return view;
     }
 }
