@@ -93,7 +93,7 @@ public class ItemDetail extends AppCompatActivity {
         //img.setim(extras.getString("name"));
         Picasso.get().load(imgUriList.get(0)).into(img);
         name.setText(extras.getString("name"));
-        price.setText(extras.getString("price"));
+        price.setText(extras.getString("price")+ "€");
         description.setText(extras.getString("description"));
         getUrl = extras.getString("fileUrl");
 
@@ -122,8 +122,9 @@ public class ItemDetail extends AppCompatActivity {
                 //downloadAfterPay();
                 Intent intent = new Intent(ItemDetail.this, CheckoutPayment.class);
                 intent.putExtra("name",name.getText());
-                intent.putExtra("price",price.getText());
+                intent.putExtra("price",extras.getString("price"));
                 intent.putExtra("img", imgUriList.get(0));
+                intent.putExtra("fileUrl", getUrl);
                 view.getContext().startActivity(intent);
             }
         });
@@ -132,22 +133,7 @@ public class ItemDetail extends AppCompatActivity {
 
     }
 
-    private void downloadAfterPay() {
-        Log.d("TAG", "onClick: " + getUrl);
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(getUrl));
-        String title = URLUtil.guessFileName(getUrl, null, null);
-        request.setTitle(title);
-        request.setDescription("Descargando archivo");
-        String coockie = CookieManager.getInstance().getCookie(getUrl);
-        request.addRequestHeader("cookie", coockie);
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "titulo");
 
-        DownloadManager downloadManager = (DownloadManager)getSystemService(DOWNLOAD_SERVICE);
-        downloadManager.enqueue(request);
-
-        Toast.makeText(getApplicationContext(), "Comenzando descarga", Toast.LENGTH_SHORT).show();
-    }
 
     public  boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= 23) {

@@ -1,5 +1,6 @@
 package com.example.a3dmarket;
 
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,10 +11,13 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.os.Environment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
+import android.webkit.CookieManager;
+import android.webkit.URLUtil;
 import android.widget.Button;
 
 import android.widget.EditText;
@@ -101,9 +105,9 @@ public class CheckoutPayment extends AppCompatActivity {
 
     // we need paymentIntentClientSecret to start transaction
     private String paymentIntentClientSecret;
+    String getUrl = "";
     //declare stripe
     private Stripe stripe;
-
 
 
     Double amountDouble=null;
@@ -113,6 +117,7 @@ public class CheckoutPayment extends AppCompatActivity {
     private OkHttpClient httpClient;
 
     static ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -125,7 +130,7 @@ public class CheckoutPayment extends AppCompatActivity {
         amountText = findViewById(R.id.pricePay);
         cardInputWidget = findViewById(R.id.stripeInputPay);
         payButton = findViewById(R.id.payButton);
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this,ProgressDialog.THEME_DEVICE_DEFAULT_LIGHT);
         progressDialog.setTitle("Transaction in progress");
         progressDialog.setCancelable(false);
         httpClient = new OkHttpClient();
@@ -153,6 +158,7 @@ public class CheckoutPayment extends AppCompatActivity {
         coste.setText(extras.getString("price"));
         Picasso.get().load((Uri) extras.get("img")).into(img);
 
+        getUrl = extras.getString("fileUrl");
 
 
         //Initialize
@@ -169,7 +175,7 @@ public class CheckoutPayment extends AppCompatActivity {
                 Log.d("TAG", "onClick: " + amountText.getText().toString());
                 amountDouble = Double.valueOf(amountText.getText().toString());
                 //call checkout to get paymentIntentClientSecret key
-                //progressDialog.show();
+                progressDialog.show();
                 startCheckout();
             }
         });
@@ -298,6 +304,8 @@ public class CheckoutPayment extends AppCompatActivity {
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
 
+                downloadAfterPay();
+
                 Intent intent = new Intent(getApplicationContext(),Home.class);
                 startActivity(intent);
 
@@ -330,5 +338,28 @@ public class CheckoutPayment extends AppCompatActivity {
         builder.setPositiveButton("Ok", null);
         builder.create().show();
     }
+
+
+
+
+
+    private void downloadAfterPay() {
+        Log.d("TAG", "onClick: " + getUrl);
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(getUrl));
+        String title = URLUtil.guessFileName(getUrl, null, null);
+        request.setTitle(title);
+        request.setDescription("Descargando archivo");
+        String coockie = CookieManager.getInstance().getCookie(getUrl);
+        request.addRequestHeader("cookie", coockie);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "titulo");
+
+        DownloadManager downloadManager = (DownloadManager)getSystemService(DOWNLOAD_SERVICE);
+        downloadManager.enqueue(request);
+
+        Toast.makeText(getApplicationContext(), "Comenzando descarga", Toast.LENGTH_SHORT).show();
+    }
+
+
 }
 
