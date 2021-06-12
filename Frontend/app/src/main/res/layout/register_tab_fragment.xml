@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <EditText
+        android:inputType="text"
         android:textColor="#000000"
         android:textColorHint="#B8B8B8"
         android:id="@+id/name_register"
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"></EditText>
 
     <EditText
+        android:inputType="textEmailAddress"
         android:textColor="#000000"
         android:textColorHint="#B8B8B8"
         android:id="@+id/email_register"
@@ -34,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></EditText>
     <EditText
+        android:inputType="textPassword"
         android:textColor="#000000"
         android:textColorHint="#B8B8B8"
         android:id="@+id/password_register"
@@ -48,6 +51,7 @@
         android:layout_height="wrap_content"></EditText>
 
     <EditText
+        android:inputType="textPassword"
         android:textColor="#000000"
         android:textColorHint="#B8B8B8"
         android:id="@+id/repeat_password"

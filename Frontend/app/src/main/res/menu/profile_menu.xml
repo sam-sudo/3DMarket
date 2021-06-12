@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/adrian"
+        app:cnb_backgroundColor="@color/white"
+        app:cnb_textColor="#F3B200"
+        app:cnb_iconColor="#F3B200"
+        android:title="ADRIÁN"
+        android:icon="@drawable/ic_baseline_person_24_light"
+        ></item>
+
+    <item android:id="@+id/samuel"
+        app:cnb_backgroundColor="@color/white"
+        app:cnb_textColor="#F3B200"
+        app:cnb_iconColor="#F3B200"
+        android:title="SAMUEL"
+        android:icon="@drawable/ic_baseline_person_24_light"></item>
+
+</menu>

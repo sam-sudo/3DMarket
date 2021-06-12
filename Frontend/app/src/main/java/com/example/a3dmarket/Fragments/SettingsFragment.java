@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.SwitchCompat;
 
+import com.example.a3dmarket.Credits;
 import com.example.a3dmarket.Home;
 import com.example.a3dmarket.Login;
 import com.example.a3dmarket.R;
@@ -101,7 +102,7 @@ public class SettingsFragment extends Fragment {
         creditos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Toas", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), Credits.class));
             }
         });
 
@@ -111,9 +112,15 @@ public class SettingsFragment extends Fragment {
     public void restartApp(){
         Toast.makeText(getContext(), "Reiniciando aplicación por favor espere", Toast.LENGTH_SHORT).show();
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 1000, getActivity().getIntent(), PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(),
+                1000,
+                getActivity().getIntent(),
+                PendingIntent.FLAG_CANCEL_CURRENT);
+
         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 2000, pendingIntent);
+
+        alarmManager.set(AlarmManager.RTC,
+                System.currentTimeMillis() + 2000, pendingIntent);
 
         getActivity().finish();
     }

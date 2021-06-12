@@ -7,7 +7,7 @@
         <item name="backgroundColor">#FFFFFF</item>
         <item name="android:textColorPrimary">#000000</item>
         <item name="android:textColorSecondary">#FFFFFF</item>
-        <item name="android:textColorTertiary">#000000</item>
+        <item name="android:textColorTertiary">#F3B200</item>
         <item name="menu">@drawable/menu_bg</item>
         <item name="colorButtonNormal">@drawable/button_bg</item>
         <item name="android:editTextColor">#FFFFFF</item>
@@ -22,7 +22,7 @@
         <item name="backgroundColor">#4A4A4A</item>
         <item name="android:textColorPrimary">#FFFFFF</item>
         <item name="android:textColorSecondary">#B8B8B8</item>
-        <item name="android:textColorTertiary">#000000</item>
+        <item name="android:textColorTertiary">#FFFFFF</item>
         <item name="menu">@drawable/menu_bg_dark</item>
         <item name="colorButtonNormal">@drawable/button_bg_dark</item>
         <item name="android:editTextColor">#B8B8B8</item>

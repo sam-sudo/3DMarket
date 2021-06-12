@@ -66,7 +66,12 @@ public class RegisterTabFragment extends Fragment {
 
                 if (!email.isEmpty() && !password.isEmpty() && !name.isEmpty() && !repeatPassword.isEmpty()){
                     if (password.length() >= 6){
-                        registerUser();
+                        if (password.equals(repeatPassword)){
+                            registerUser();
+                        }else{
+                            Toast.makeText(getContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                        }
+
                     }else{
                         Toast.makeText(getContext(), "Contraseña demasiado corta", Toast.LENGTH_SHORT).show();
                     }
@@ -81,7 +86,7 @@ public class RegisterTabFragment extends Fragment {
     }
 
     private void registerUser(){
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(email.trim(), password.trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){

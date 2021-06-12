@@ -15,6 +15,7 @@ import android.webkit.CookieManager;
 import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -41,6 +42,8 @@ public class ItemDetail extends AppCompatActivity {
     Button compraButton;
     String getUrl = "";
     LinearLayoutCompat layout;
+    LinearLayout barra;
+    ImageView back;
 
     private Preview_Items_ImgAdapter preview_items_imgAdapter;
 
@@ -52,16 +55,20 @@ public class ItemDetail extends AppCompatActivity {
         setContentView(R.layout.itemdetail);
 
         layout = (LinearLayoutCompat)findViewById(R.id.layoutItem);
+        barra = (LinearLayout)findViewById(R.id.barra);
+
 
         sharedPref = new SharedPref(this);
 
 
 
-        TextView  name  = findViewById(R.id.name);
-        TextView  desc  = findViewById(R.id.desc);
-        TextView  price = findViewById(R.id.price);
+        TextView  name        = findViewById(R.id.name);
+        TextView  desc        = findViewById(R.id.desc);
+        TextView  price       = findViewById(R.id.price);
         TextView  description = findViewById(R.id.description);
-        ImageView img   = findViewById(R.id.img);
+        ImageView img         = findViewById(R.id.img);
+
+        back = (ImageView) findViewById(R.id.back);
 
         compraButton = (Button) findViewById(R.id.compraButton);
 
@@ -73,10 +80,19 @@ public class ItemDetail extends AppCompatActivity {
             description.setTextColor(Color.parseColor("#FFFFFF"));
             desc.setTextColor(Color.parseColor("#FFFFFF"));
             compraButton.setBackground(getDrawable(R.drawable.button_bg_dark));
+            barra.setBackgroundColor(Color.parseColor("#000000"));
         }else{
             setTheme(R.style.AppThemeDay);
             layout.setBackgroundColor(Color.parseColor("#FFFFFF"));
         }
+
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         Bundle extras = getIntent().getExtras();
 

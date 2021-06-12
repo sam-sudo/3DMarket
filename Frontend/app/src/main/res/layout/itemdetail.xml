@@ -7,13 +7,31 @@
     android:layout_height="match_parent">
 
 
+
+
  <ScrollView
      android:layout_width="match_parent"
      android:layout_height="match_parent">
+
+
   <LinearLayout
       android:orientation="vertical"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
+
+   <LinearLayout
+       android:id="@+id/barra"
+       android:background="?attr/colorPrimary"
+       android:layout_width="match_parent"
+       android:orientation="horizontal"
+       android:layout_height="50dp">
+    <ImageView
+        android:id="@+id/back"
+        android:src="@drawable/back"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"></ImageView>
+
+   </LinearLayout>
 
    <ImageView
        android:layout_marginTop="50dp"
