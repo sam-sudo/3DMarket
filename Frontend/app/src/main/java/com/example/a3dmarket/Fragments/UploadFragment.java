@@ -233,8 +233,6 @@ public class UploadFragment extends Fragment {
                      Log.d("TAG", "onActivityResult: es imagen");
                      //btnUp.setEnabled(true);
 
-
-
                      previewImgList.add(uri);
 
                      RecyclerView recyclerView = getView().findViewById(R.id.previewImgReciclerView);
