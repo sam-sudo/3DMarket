@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
+    tools:context=".Fragments.SearchFragment">
+
+   <androidx.appcompat.widget.LinearLayoutCompat
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
+
+
+       <SearchView
+           android:paddingTop="10dp"
+           android:paddingBottom="10dp"
+           android:layout_marginTop="10dp"
+           android:layout_marginEnd="10dp"
+           android:layout_marginStart="10dp"
+           android:background="?attr/colorButtonNormal"
+           android:id="@+id/searchView"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:queryHint="Buscar..."
+           android:iconifiedByDefault="false"
+           android:layout_alignParentTop="true"
+           />
+
+       <!--<androidx.appcompat.widget.LinearLayoutCompat
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="#FFC107"
+           android:layout_marginRight="10dp"
+           android:layout_marginLeft="10dp"
+           android:gravity="center">
+
+           <CheckBox android:id="@+id/less_100"
+               android:layout_marginEnd="10dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="0€ - 100€"
+               />
+           <CheckBox android:id="@+id/B_100_400"
+               android:layout_marginEnd="10dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="100€ - 400€"
+               />
+           <CheckBox android:id="@+id/more_400"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginEnd="10dp"
+               android:text="> 400€"
+               />
+
+
+
+
+       </androidx.appcompat.widget.LinearLayoutCompat>-->
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/recyclerView"
+           android:paddingBottom="50dp"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+       </androidx.recyclerview.widget.RecyclerView>
+
+       <!--&lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;
+       <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+           xmlns:android="http://schemas.android.com/apk/res/android"
+           xmlns:tools="http://schemas.android.com/tools"
+           android:layout_marginTop="10px"
+           android:id="@+id/refreshLayout"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+
+           tools:context=".HomeFragment">
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/recyclerView"
+               android:paddingBottom="50dp"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
+
+           </androidx.recyclerview.widget.RecyclerView>
+
+       </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
+
+
+   </androidx.appcompat.widget.LinearLayoutCompat>
+
+</FrameLayout>
