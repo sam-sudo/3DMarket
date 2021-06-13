@@ -105,7 +105,7 @@ public class SearchFragment extends Fragment  {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("TAG", "onItemSelected erererer: " + position);
-                
+
                 printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,position);
 
             }
@@ -219,11 +219,13 @@ public class SearchFragment extends Fragment  {
 
     private void printAllDocumentFromFirebase(String nameCollection, RecyclerView recyclerView, String wordToSearch, int filter) {
 
-        itemList.clear();
+
 
         db.collection(nameCollection).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                itemList.clear();
 
                 if (task.isSuccessful()) {
 
