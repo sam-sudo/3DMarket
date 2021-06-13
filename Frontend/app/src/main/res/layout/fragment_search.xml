@@ -15,7 +15,9 @@
        <SearchView
            android:paddingTop="10dp"
            android:paddingBottom="10dp"
-           android:layout_margin="10dp"
+           android:layout_marginTop="10dp"
+           android:layout_marginEnd="10dp"
+           android:layout_marginStart="10dp"
            android:background="?attr/colorButtonNormal"
            android:id="@+id/searchView"
            android:layout_width="match_parent"
@@ -24,7 +26,46 @@
            android:iconifiedByDefault="false"
            android:layout_alignParentTop="true"
            />
+       <Spinner
+           android:id="@+id/spinner"
+           android:layout_marginEnd="10dp"
+           android:layout_marginStart="10dp"
+           android:backgroundTint="@color/black"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
 
+       </Spinner>
+       <!--<androidx.appcompat.widget.LinearLayoutCompat
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="#FFC107"
+           android:layout_marginRight="10dp"
+           android:layout_marginLeft="10dp"
+           android:gravity="center">
+
+           <CheckBox android:id="@+id/less_100"
+               android:layout_marginEnd="10dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="0€ - 100€"
+               />
+           <CheckBox android:id="@+id/B_100_400"
+               android:layout_marginEnd="10dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="100€ - 400€"
+               />
+           <CheckBox android:id="@+id/more_400"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginEnd="10dp"
+               android:text="> 400€"
+               />
+
+
+
+
+       </androidx.appcompat.widget.LinearLayoutCompat>-->
        <androidx.recyclerview.widget.RecyclerView
            android:id="@+id/recyclerView"
            android:paddingBottom="50dp"

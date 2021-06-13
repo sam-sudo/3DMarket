@@ -109,7 +109,6 @@ public class HomeFragment extends Fragment {
 
                         ArrayList<Map<String, Object>> imgList = (ArrayList<Map<String, Object>>) document.get("urlList");
 
-
                         ArrayList url = imgList;
                         String price = (String) document.getData().get("price");
                         String name = (String) document.getData().get("name");
@@ -118,11 +117,7 @@ public class HomeFragment extends Fragment {
                         String author = (String) document.getData().get("author");
                         //Log.d("TAG", document.getId() + " => " + url);
                         itemList.add(new Item(url, fileUrl, name, price, description, author));
-
-
                     }
-
-
                     //get first the new data with a reverse from list of firebase
                     Collections.reverse(itemList);
                     adapter.notifyDataSetChanged();

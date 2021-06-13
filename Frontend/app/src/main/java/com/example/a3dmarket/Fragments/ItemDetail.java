@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.URLUtil;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.core.app.ActivityCompat;
@@ -32,6 +34,8 @@ import com.example.a3dmarket.CheckoutPayment;
 import com.example.a3dmarket.R;
 import com.example.a3dmarket.SharedPref;
 import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.zip.Inflater;
@@ -67,6 +71,7 @@ public class ItemDetail extends AppCompatActivity {
         TextView  price       = findViewById(R.id.price);
         TextView  description = findViewById(R.id.description);
         ImageView img         = findViewById(R.id.img);
+        ImageView arrow         = findViewById(R.id.back);
 
         back = (ImageView) findViewById(R.id.back);
 
@@ -80,7 +85,8 @@ public class ItemDetail extends AppCompatActivity {
             description.setTextColor(Color.parseColor("#FFFFFF"));
             desc.setTextColor(Color.parseColor("#FFFFFF"));
             compraButton.setBackground(getDrawable(R.drawable.button_bg_dark));
-            barra.setBackgroundColor(Color.parseColor("#000000"));
+            arrow.setImageResource(R.drawable.arrow);
+            barra.setBackgroundColor(Color.parseColor("#FF2B2B2B"));
         }else{
             setTheme(R.style.AppThemeDay);
             layout.setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -125,10 +131,8 @@ public class ItemDetail extends AppCompatActivity {
 
         preview_items_imgAdapter = new Preview_Items_ImgAdapter(getApplicationContext(),imgUriList);
 
+
         recyclerView.setAdapter(preview_items_imgAdapter);
-
-
-
 
 
 

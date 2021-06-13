@@ -28,16 +28,17 @@ public class Preview_Items_ImgAdapter extends RecyclerView.Adapter<Preview_Items
 
     private ArrayList<Uri> previewImgList = new ArrayList<>();
     private LayoutInflater mInflater;
+    Context context;
 
 
 
     public Preview_Items_ImgAdapter(Context context, ArrayList previewImgList) {
+        this.context = context;
         this.mInflater = LayoutInflater.from(context);
         this.previewImgList = previewImgList;
 
     }
 
-    ImageView imagen;
 
     @Override
     @NonNull
@@ -57,7 +58,7 @@ public class Preview_Items_ImgAdapter extends RecyclerView.Adapter<Preview_Items
 
             @Override
             public void onClick(View v) {
-                Log.d("TAG", "onClick: real" + position );
+                Log.d("TAG", "onClick: real" + position  );
 
 
 

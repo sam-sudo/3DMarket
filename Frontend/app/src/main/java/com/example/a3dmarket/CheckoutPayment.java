@@ -185,16 +185,13 @@ public class CheckoutPayment extends AppCompatActivity {
         {
             // Create a PaymentIntent by calling the server's endpoint.
             MediaType mediaType = MediaType.get("application/json; charset=utf-8");
-        /*String json = "{"
-                + "\"currency\":\"usd\","
-                + "\"items\":["
-                + "{\"id\":\"photo_subscription\"}"
-                + "]"
-                + "}";*/
             double amount= Math.round(amountDouble * 100);
+
             Map<String,Object> payMap=new HashMap<>();
             Map<String,Object> itemMap=new HashMap<>();
+
             List<Map<String,Object>> itemList =new ArrayList<>();
+
             payMap.put("currency","usd");
             itemMap.put("id","objet__3D");
             itemMap.put("amount",amount);
@@ -203,6 +200,7 @@ public class CheckoutPayment extends AppCompatActivity {
             payMap.put("items",itemList);
             String json = new Gson().toJson(payMap);
             RequestBody body = RequestBody.create(json, mediaType);
+
             Request request = new Request.Builder()
                     .url(BACKEND_URL + "create-payment-intent")
                     .post(body)

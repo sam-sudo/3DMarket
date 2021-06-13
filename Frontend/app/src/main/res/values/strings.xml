@@ -32,4 +32,11 @@
         <item>Tres</item>
     </string-array>
 
+    <string-array name="listaSpinner">
+        <item>No filter</item>
+        <item>0€ - 100€</item>
+        <item>100€ - 400€</item>
+        <item>+ 400€</item>
+    </string-array>
+
 </resources>

@@ -1,6 +1,5 @@
 package com.example.a3dmarket.Fragments;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,12 +10,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.SearchView;
-import android.widget.Toast;
+import android.widget.Spinner;
 
 import com.example.a3dmarket.Adapters.ItemAdapter;
 import com.example.a3dmarket.Item;
@@ -28,8 +29,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,7 +39,7 @@ import java.util.Map;
  * Use the {@link SearchFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment  {
 
     SharedPref sharedPref;
 
@@ -51,6 +50,13 @@ public class SearchFragment extends Fragment {
     SwipeRefreshLayout refreshLayout;
     ItemAdapter adapter = new ItemAdapter(itemList);
     SearchView searchView ;
+    /*int check = 0;
+    CheckBox check_0_100;
+    CheckBox check_100_400;
+    CheckBox more_400;*/
+    Spinner spinner;
+
+    String textToSearch="";
 
 
     public SearchFragment() {
@@ -69,7 +75,6 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -83,8 +88,35 @@ public class SearchFragment extends Fragment {
         refreshLayout = view.findViewById(R.id.refreshLayout);
         searchView =  view.findViewById(R.id.searchView);
         itemRecyclerView.setAdapter(adapter);
-
+        /*check_100_400 = view.findViewById(R.id.B_100_400);
+        check_0_100 = view.findViewById(R.id.less_100);
+        more_400 = view.findViewById(R.id.more_400);*/
         sharedPref = new SharedPref(getContext());
+        spinner = view.findViewById(R.id.spinner);
+
+
+        ArrayAdapter adapterSpinner = ArrayAdapter.createFromResource(
+                getContext(),R.array.listaSpinner,android.R.layout.simple_list_item_1);
+
+        adapterSpinner.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        spinner.setAdapter(adapterSpinner);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("TAG", "onItemSelected erererer: " + position);
+
+                printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
         if (sharedPref.loadNightModeState() == true){
             getActivity().setTheme(R.style.AppThemeDark);
@@ -98,29 +130,60 @@ public class SearchFragment extends Fragment {
                 new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         );
 
-        // Create a firestore reference from our app
-        //CollectionReference item = db.collection("items");
-
-        // Create a storage reference from our app
-        //FirebaseStorage storage = FirebaseStorage.getInstance();
-        //StorageReference storageRef = storage.getReference();
+        //printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,0);
 
 
-
-
-        /*refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-
+        /*check_0_100.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onRefresh() {
-                itemList.clear();
-                printAllDocumentFromFirebase("items",itemRecyclerView,"");
-                refreshLayout.setRefreshing(false);
-                //adapter.notifyDataSetChanged();
-                Log.d("TAG", "Refrash DONE");
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+                if(isChecked){
+                    Log.d("TAG", "onCheckedChanged: 0");
+                    check = 1;
+                    printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,1);
+
+                }else {
+                    check = 0;
+                    printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,0);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+
+        check_100_400.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked){
+                    Log.d("TAG", "onCheckedChanged: 0");
+                    check = 2;
+                    printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,2);
+
+                }else {
+                    check = 0;
+                    printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,0);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        more_400.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked){
+                    Log.d("TAG", "onCheckedChanged: 0");
+                    check = 3;
+                    printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,3);
+
+                }else {
+                    check = 0;
+                    printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,0);
+                }
+                adapter.notifyDataSetChanged();
             }
         });*/
-
 
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -132,7 +195,9 @@ public class SearchFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                printAllDocumentFromFirebase("items",itemRecyclerView, newText);
+                textToSearch = newText;
+
+                printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,0);
 
 
 
@@ -148,7 +213,11 @@ public class SearchFragment extends Fragment {
     }
 
 
-    private void printAllDocumentFromFirebase(String nameCollection, RecyclerView recyclerView, String wordToSearch) {
+
+
+
+
+    private void printAllDocumentFromFirebase(String nameCollection, RecyclerView recyclerView, String wordToSearch, int filter) {
 
         itemList.clear();
 
@@ -162,44 +231,26 @@ public class SearchFragment extends Fragment {
 
                         ArrayList<Map<String, Object>> imgList = (ArrayList<Map<String, Object>>) document.get("urlList");
 
-
+                        ArrayList url = imgList;
+                        String price = (String) document.getData().get("price");
+                        String name = (String) document.getData().get("name");
+                        String description = (String) document.getData().get("description");
+                        String fileUrl = (String) document.getData().get("urlFile");
+                        String author = (String) document.getData().get("author");
+                        //Log.d("TAG", document.getId() + " => " + url);
 
                         if(wordToSearch.equalsIgnoreCase("")){
 
-
-                            ArrayList url = imgList;
-                            String price = (String) document.getData().get("price");
-                            String name = (String) document.getData().get("name");
-                            String description = (String) document.getData().get("description");
-                            String fileUrl = (String) document.getData().get("urlFile");
-                            String author = (String) document.getData().get("author");
-                            //Log.d("TAG", document.getId() + " => " + url);
-                            itemList.add(new Item(url, fileUrl, name, price, description,author));
+                            regexPrice(document, url, price, name, description, fileUrl, author,filter);
 
                         }else {
 
                             if(document.getData().get("name").toString().contains(wordToSearch)){
-
-
-
-                                ArrayList url = imgList;
-                                String price = (String) document.getData().get("price");
-                                String name = (String) document.getData().get("name");
-                                String description = (String) document.getData().get("description");
-                                String fileUrl = (String) document.getData().get("urlFile");
-                                String author = (String) document.getData().get("author");
-                                //Log.d("TAG", document.getId() + " => " + url);
-                                itemList.add(new Item(url, fileUrl, name, price, description,author));
+                                regexPrice(document, url, price, name, description, fileUrl, author,filter);
 
                             }
-
-
                         }
-
-
                     }
-
-
                     //get first the new data with a reverse from list of firebase
                     Collections.reverse(itemList);
                     adapter.notifyDataSetChanged();
@@ -212,8 +263,44 @@ public class SearchFragment extends Fragment {
 
             }
 
+            private void regexPrice(QueryDocumentSnapshot document, ArrayList url, String price, String name, String description, String fileUrl, String author, int filter) {
+                int priceToSearch = Integer.parseInt(document.getData().get("price").toString());
+
+                switch (filter){
+
+                    default:
+                        itemList.add(new Item(url, fileUrl, name, price, description, author));
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case 1:
+
+                        if(priceToSearch <= 100 ){
+                            itemList.add(new Item(url, fileUrl, name, price, description, author));
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        break;
+                    case 2:
+
+                        if(priceToSearch >= 100 && priceToSearch <= 400){
+                            itemList.add(new Item(url, fileUrl, name, price, description, author));
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        break;
+                    case 3:
+
+                        if(priceToSearch >= 400){
+                            itemList.add(new Item(url, fileUrl, name, price, description, author));
+                        }
+
+                        break;
+                }
+            }
+
         });
     }
+
 
 
 }
