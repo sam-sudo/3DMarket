@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.TimerTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -126,7 +127,11 @@ public class SearchFragmentNotUser extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                printAllDocumentFromFirebase("items",itemRecyclerView, newText);
+
+
+                printAllDocumentFromFirebase("items",itemRecyclerView, newText.toLowerCase());
+
+
 
 
 
@@ -144,11 +149,14 @@ public class SearchFragmentNotUser extends Fragment {
 
     private void printAllDocumentFromFirebase(String nameCollection, RecyclerView recyclerView, String wordToSearch) {
 
-        itemList.clear();
+
+
 
         db.collection(nameCollection).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                itemList.clear();
 
                 if (task.isSuccessful()) {
 
@@ -203,6 +211,8 @@ public class SearchFragmentNotUser extends Fragment {
 
                     Log.d("TAG", "Error getting documents: ", task.getException());
                 }
+
+                Log.d("TAG", "onQueryTextChange: " + itemList.size());
 
             }
 

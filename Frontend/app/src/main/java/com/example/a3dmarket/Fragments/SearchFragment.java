@@ -105,7 +105,7 @@ public class SearchFragment extends Fragment  {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("TAG", "onItemSelected erererer: " + position);
-
+                
                 printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,position);
 
             }
