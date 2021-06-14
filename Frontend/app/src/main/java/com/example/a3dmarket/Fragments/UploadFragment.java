@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 
 import com.example.a3dmarket.Adapters.Preview_Items_ImgAdapter;
+import com.example.a3dmarket.Home;
 import com.example.a3dmarket.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -182,6 +183,7 @@ public class UploadFragment extends Fragment {
 
                     try {
                         UpFilesToFirebase(imagesUri);
+
                         btnUp.setEnabled(false);
                     }catch (Exception e){
                         Log.d("TAG", "onClick: FALLO AL SUBIR ARCHUVOS");
@@ -345,6 +347,9 @@ public class UploadFragment extends Fragment {
                                                     @Override
                                                     public void onSuccess(DocumentReference documentReference) {
                                                         Log.d("TAG", "UpFilesToFirebase: DONEE!!!");
+                                                        Intent intent = new Intent(getContext(), Home.class);
+                                                        getContext().startActivity(intent);
+                                                        getActivity().finish();
                                                         previewImgList.clear();
                                                     }
                                                 });

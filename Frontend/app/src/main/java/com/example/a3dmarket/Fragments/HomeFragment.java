@@ -1,5 +1,7 @@
 package com.example.a3dmarket.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,8 @@ import android.view.ViewGroup;
 import com.example.a3dmarket.Adapters.ItemAdapter;
 import com.example.a3dmarket.Item;
 import com.example.a3dmarket.R;
+import com.example.a3dmarket.SharedPref;
+import com.facebook.share.Share;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -64,9 +68,11 @@ public class HomeFragment extends Fragment {
         refreshLayout = view.findViewById(R.id.refreshLayout);
         itemRecyclerView.setAdapter(adapter);
 
+        SharedPref sharedPref = new SharedPref(getContext());
+
         //Pinterest efect grid
         itemRecyclerView.setLayoutManager(
-                new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+                new StaggeredGridLayoutManager(sharedPref.loadLayoutHome(), StaggeredGridLayoutManager.VERTICAL)
         );
 
         // Create a firestore reference from our app
@@ -132,4 +138,6 @@ public class HomeFragment extends Fragment {
 
         });
     }
+
+
 }

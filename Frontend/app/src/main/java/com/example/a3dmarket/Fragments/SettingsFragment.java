@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.SwitchCompat;
@@ -43,7 +45,11 @@ public class SettingsFragment extends Fragment {
     private CheckBox mySwitch;
     SharedPref sharedPref;
     Button cerrarSesion, resetPass, creditos;
+    RadioGroup radioGroup;
+    RadioButton col_2, col_3;
     FirebaseAuth mAuth;
+
+    int rows = 3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,8 +60,12 @@ public class SettingsFragment extends Fragment {
         cerrarSesion = (Button)root.findViewById(R.id.singout);
         resetPass = (Button)root.findViewById(R.id.reseet);
         creditos = (Button)root.findViewById(R.id.credits);
+        radioGroup = root.findViewById(R.id.col_RdioGroup);
+        col_2 = root.findViewById(R.id.col_2);
+        col_3 = root.findViewById(R.id.col_3);
 
         mAuth = FirebaseAuth.getInstance();
+
 
         if (sharedPref.loadNightModeState() == true){
             getActivity().setTheme(R.style.AppThemeDark);
@@ -63,20 +73,55 @@ public class SettingsFragment extends Fragment {
             getActivity().setTheme(R.style.AppThemeDay);
         }
 
+        if(sharedPref.loadLayoutHome() == 2){
+            col_2.setChecked(true);
+        }else {
+            col_3.setChecked(true);
+        }
+
+
         mySwitch = (CheckBox) root.findViewById(R.id.mySwitch);
         if (sharedPref.loadNightModeState() == true){
             mySwitch.setChecked(true);
         }
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+
+                    case R.id.col_2:
+                        sharedPref.setLayoutHome(2);
+                        break;
+
+                    case R.id.col_3:
+                        sharedPref.setLayoutHome(3);
+                        break;
+
+                }
+            }
+        });
+
 
         mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
                     sharedPref.setNightModeState(true);
-                    restartApp();
+                    Intent intent = getActivity().getIntent();
+                    getActivity().overridePendingTransition(0,0);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    getActivity().finish();
+                    startActivity(intent);
+                    //restartApp();
                 }else{
                     sharedPref.setNightModeState(false);
-                    restartApp();
+                    Intent intent = getActivity().getIntent();
+                    getActivity().overridePendingTransition(0,0);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    getActivity().finish();
+                    startActivity(intent);
+                    //restartApp();
                 }
             }
         });
