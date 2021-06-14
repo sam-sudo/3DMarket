@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -19,6 +20,7 @@ import android.webkit.URLUtil;
 import android.widget.Button;
 
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,7 @@ import com.google.gson.GsonBuilder;
 
 import com.google.gson.reflect.TypeToken;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 import com.stripe.android.ApiResultCallback;
 
@@ -124,12 +127,15 @@ public class CheckoutPayment extends AppCompatActivity {
         progressDialog.setCancelable(false);
         httpClient = new OkHttpClient();
 
+        TextView titulo = findViewById(R.id.titleEdit);
+
         if (sharedPref.loadNightModeState() == true){
             setTheme(R.style.AppThemeDark);
             layout.setBackgroundColor(Color.parseColor("#4A4A4A"));
             amountText.setTextColor(Color.parseColor("#FFFFFF"));
             payButton.setBackground(getDrawable(R.drawable.button_bg_dark));
             cardInputWidget.setBackgroundColor(Color.parseColor("#4A4A4A"));
+            titulo.setTextColor(Color.parseColor("#FFFFFF"));
 
         }else{
             setTheme(R.style.AppThemeDay);
@@ -137,9 +143,9 @@ public class CheckoutPayment extends AppCompatActivity {
             cardInputWidget.setBackgroundColor(Color.parseColor("#F3B200"));
         }
 
-        TextView titulo = findViewById(R.id.titleEdit);
+
         TextView coste = findViewById(R.id.pricePay);
-        ImageView img = findViewById(R.id.imgToPay);
+        RoundedImageView img = findViewById(R.id.imgToPay);
 
         Bundle extras = getIntent().getExtras();
 
