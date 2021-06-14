@@ -180,7 +180,7 @@ public class SearchFragmentNotUser extends Fragment {
 
                         }else {
 
-                            if(document.getData().get("name").toString().contains(wordToSearch)){
+                            if(document.getData().get("name").toString().toLowerCase().contains(wordToSearch)){
 
 
 

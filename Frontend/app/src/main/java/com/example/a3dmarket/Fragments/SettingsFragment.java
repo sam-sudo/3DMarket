@@ -113,6 +113,7 @@ public class SettingsFragment extends Fragment {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     getActivity().finish();
                     startActivity(intent);
+
                     //restartApp();
                 }else{
                     sharedPref.setNightModeState(false);

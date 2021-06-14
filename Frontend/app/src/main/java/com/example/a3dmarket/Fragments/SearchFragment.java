@@ -125,65 +125,14 @@ public class SearchFragment extends Fragment  {
             getActivity().setTheme(R.style.AppThemeDay);
         }
 
+        SharedPref sharedPref = new SharedPref(getContext());
+
         //Pinterest efect grid
         itemRecyclerView.setLayoutManager(
-                new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+                new StaggeredGridLayoutManager(sharedPref.loadLayoutHome(), StaggeredGridLayoutManager.VERTICAL)
         );
 
-        //printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,0);
 
-
-        /*check_0_100.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if(isChecked){
-                    Log.d("TAG", "onCheckedChanged: 0");
-                    check = 1;
-                    printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,1);
-
-                }else {
-                    check = 0;
-                    printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,0);
-                }
-                adapter.notifyDataSetChanged();
-            }
-        });
-
-
-        check_100_400.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if(isChecked){
-                    Log.d("TAG", "onCheckedChanged: 0");
-                    check = 2;
-                    printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,2);
-
-                }else {
-                    check = 0;
-                    printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,0);
-                }
-                adapter.notifyDataSetChanged();
-            }
-        });
-
-        more_400.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if(isChecked){
-                    Log.d("TAG", "onCheckedChanged: 0");
-                    check = 3;
-                    printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,3);
-
-                }else {
-                    check = 0;
-                    printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,0);
-                }
-                adapter.notifyDataSetChanged();
-            }
-        });*/
 
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -196,6 +145,7 @@ public class SearchFragment extends Fragment  {
             public boolean onQueryTextChange(String newText) {
 
                 textToSearch = newText;
+                newText.toLowerCase();
 
                 printAllDocumentFromFirebase("items",itemRecyclerView, textToSearch,0);
 
@@ -247,7 +197,7 @@ public class SearchFragment extends Fragment  {
 
                         }else {
 
-                            if(document.getData().get("name").toString().contains(wordToSearch)){
+                            if(document.getData().get("name").toString().toLowerCase().contains(wordToSearch)){
                                 regexPrice(document, url, price, name, description, fileUrl, author,filter);
 
                             }

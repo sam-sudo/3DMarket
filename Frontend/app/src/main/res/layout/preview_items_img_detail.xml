@@ -20,13 +20,7 @@
 
     </com.makeramen.roundedimageview.RoundedImageView>
 
-    <ImageView
-        android:id="@+id/deleteBtn"
-        android:layout_marginLeft="-30dp"
-        android:layout_marginBottom="-30dp"
-        android:src="@android:drawable/ic_delete"
-        android:layout_width="30dp"
-        android:layout_height="30dp"></ImageView>
+
 
 
 </LinearLayout>

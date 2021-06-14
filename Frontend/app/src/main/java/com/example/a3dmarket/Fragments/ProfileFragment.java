@@ -49,7 +49,7 @@ public class ProfileFragment extends Fragment {
     DatabaseReference mDatabase;
     FirebaseFirestore db    = FirebaseFirestore.getInstance();
 
-    TextView name, email;
+    TextView name, email, noItems;
 
     ListView listView;
     ArrayList productList = new ArrayList();
@@ -68,7 +68,8 @@ public class ProfileFragment extends Fragment {
 
         name = (TextView) view.findViewById(R.id.name_profile);
         email = (TextView) view.findViewById(R.id.email_profile);
-
+        noItems = view.findViewById(R.id.noItems);
+        noItems.setVisibility(View.GONE);
 
 
         listView = view.findViewById(R.id.productList);
@@ -116,6 +117,8 @@ public class ProfileFragment extends Fragment {
 
                 if (task.isSuccessful()) {
 
+
+
                     for (QueryDocumentSnapshot document : task.getResult()) {
 
 
@@ -139,6 +142,12 @@ public class ProfileFragment extends Fragment {
                             Log.d("name", "onComplete2: " + author);
                         }
 
+
+
+                    }
+
+                    if(productList.size() <= 0){
+                        noItems.setVisibility(View.VISIBLE);
 
                     }
 

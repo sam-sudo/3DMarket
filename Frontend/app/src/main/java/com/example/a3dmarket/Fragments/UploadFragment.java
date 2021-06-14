@@ -286,7 +286,7 @@ public class UploadFragment extends Fragment {
 
         // Create a reference
         // Archivo
-        StorageReference fileRef = storageRef.child("archivos/"+ fileName + "_" + uniqueID);
+        StorageReference fileRef = storageRef.child("archivos/"+ uniqueID + "_" + fileName );
 
         ArrayList<String> realUrlList = new ArrayList<>();
 
@@ -320,7 +320,7 @@ public class UploadFragment extends Fragment {
 
                             // Create a reference
                             // imagen
-                            StorageReference imagesRef = storageRef.child("imagen/"+ imgName + "_" + uniqueID);
+                            StorageReference imagesRef = storageRef.child("imagen/"+ uniqueID+"_" +imgName );
 
                             int count = i;
                             imagesRef.putFile(uriArr.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

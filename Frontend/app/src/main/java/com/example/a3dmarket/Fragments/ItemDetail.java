@@ -1,25 +1,19 @@
 package com.example.a3dmarket.Fragments;
 
 import android.Manifest;
-import android.app.DownloadManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.webkit.CookieManager;
-import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.a3dmarket.Adapters.Preview_Items_ImgAdapter;
+import com.example.a3dmarket.Adapters.Preview_Items_ImgAdapter_Detail;
 import com.example.a3dmarket.CheckoutPayment;
 import com.example.a3dmarket.R;
 import com.example.a3dmarket.SharedPref;
@@ -38,7 +33,6 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 public class ItemDetail extends AppCompatActivity {
 
@@ -49,7 +43,7 @@ public class ItemDetail extends AppCompatActivity {
     LinearLayout barra;
     ImageView back;
 
-    private Preview_Items_ImgAdapter preview_items_imgAdapter;
+    private Preview_Items_ImgAdapter_Detail preview_items_imgAdapter_detail;
 
 
     @Override
@@ -129,11 +123,10 @@ public class ItemDetail extends AppCompatActivity {
 
         recyclerView.setLayoutManager(horizontalLayoutManager);
 
-        preview_items_imgAdapter = new Preview_Items_ImgAdapter(getApplicationContext(),imgUriList);
+        preview_items_imgAdapter_detail = new Preview_Items_ImgAdapter_Detail(getApplicationContext(),imgUriList);
 
 
-        recyclerView.setAdapter(preview_items_imgAdapter);
-
+        recyclerView.setAdapter(preview_items_imgAdapter_detail);
 
 
         compraButton.setOnClickListener(new View.OnClickListener() {

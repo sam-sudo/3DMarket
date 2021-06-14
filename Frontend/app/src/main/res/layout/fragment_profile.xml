@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="?attr/backgroundColor"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.ProfileFragment">
@@ -47,6 +49,18 @@
             android:text="TUS PRODUCTOS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></TextView>
+
+        <TextView
+            android:id="@+id/noItems"
+            android:text="No tienes productos a la venta"
+            android:textSize="20dp"
+            android:textColor="?attr/colorSecondary"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TextView>
 
         <ListView
             android:id="@+id/productList"

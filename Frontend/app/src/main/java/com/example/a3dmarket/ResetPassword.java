@@ -39,7 +39,7 @@ public class ResetPassword extends AppCompatActivity {
         enviar     = (Button)   findViewById(R.id.resetPassword);
         showDialog = (ImageView) findViewById(R.id.show_information);
 
-        mDialog  = new ProgressDialog(this);
+        mDialog = new ProgressDialog(this,ProgressDialog.THEME_DEVICE_DEFAULT_LIGHT);
         myDialog = new Dialog(this);
 
         mAuth = FirebaseAuth.getInstance();

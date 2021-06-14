@@ -26,6 +26,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -83,8 +84,24 @@ public class HomeFragment extends Fragment {
         //StorageReference storageRef = storage.getReference();
 
 
-
         printAllDocumentFromFirebase("items",itemRecyclerView);
+        Object tag = new Object();
+
+        itemRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
+            {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE)
+                {
+
+                    //Picasso.get().resumeTag(tag);
+                }
+                else
+                {
+                    //Picasso.get().pauseTag(tag);
+                }
+            }
+        });
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 

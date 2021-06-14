@@ -2,8 +2,6 @@ package com.example.a3dmarket;
 
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 
 import android.content.Intent;
 
@@ -20,7 +18,6 @@ import android.webkit.CookieManager;
 import android.webkit.URLUtil;
 import android.widget.Button;
 
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +31,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
-import com.google.firebase.database.annotations.NotNull;
 import com.google.gson.Gson;
 
 import com.google.gson.GsonBuilder;
@@ -44,7 +40,6 @@ import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 import com.stripe.android.ApiResultCallback;
 
-import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.PaymentIntentResult;
 
 import com.stripe.android.Stripe;
@@ -55,12 +50,7 @@ import com.stripe.android.model.PaymentIntent;
 
 import com.stripe.android.model.PaymentMethodCreateParams;
 
-import com.stripe.android.paymentsheet.PaymentSheet;
-import com.stripe.android.paymentsheet.PaymentSheetResult;
 import com.stripe.android.view.CardInputWidget;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -74,7 +64,6 @@ import java.util.List;
 import java.util.Map;
 
 import java.util.Objects;
-import java.util.zip.Inflater;
 
 import okhttp3.Call;
 
@@ -89,7 +78,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 public class CheckoutPayment extends AppCompatActivity {
 
@@ -109,6 +97,7 @@ public class CheckoutPayment extends AppCompatActivity {
     //declare stripe
     private Stripe stripe;
 
+    String amount;
 
     Double amountDouble=null;
 
@@ -155,11 +144,12 @@ public class CheckoutPayment extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         titulo.setText(extras.getString("name"));
-        coste.setText(extras.getString("price"));
+        coste.setText(extras.getString("price")+"€");
         Picasso.get().load((Uri) extras.get("img")).into(img);
 
         getUrl = extras.getString("fileUrl");
 
+        amount = extras.getString("price");
 
         //Initialize
         stripe = new Stripe(
@@ -172,8 +162,8 @@ public class CheckoutPayment extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //get Amount
-                Log.d("TAG", "onClick: " + amountText.getText().toString());
-                amountDouble = Double.valueOf(amountText.getText().toString());
+                //Log.d("TAG", "onClick: " + amountText.getText().toString());
+                amountDouble = Double.valueOf(amount);
                 //call checkout to get paymentIntentClientSecret key
                 progressDialog.show();
                 startCheckout();
