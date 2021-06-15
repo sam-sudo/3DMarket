@@ -347,10 +347,12 @@ public class UploadFragment extends Fragment {
                                                     @Override
                                                     public void onSuccess(DocumentReference documentReference) {
                                                         Log.d("TAG", "UpFilesToFirebase: DONEE!!!");
-                                                        Intent intent = new Intent(getContext(), Home.class);
-                                                        getContext().startActivity(intent);
-                                                        getActivity().finish();
-                                                        previewImgList.clear();
+                                                        try {
+                                                            Intent intent = new Intent(context, Home.class);
+                                                            getContext().startActivity(intent);
+                                                            getActivity().finish();
+                                                            previewImgList.clear();
+                                                        }catch (Exception e){}
                                                     }
                                                 });
 
