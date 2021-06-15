@@ -67,12 +67,13 @@ public class ItemDetailNotUser extends AppCompatActivity {
             imgUriList.add(Uri.parse(itemList));
         }
 
+        String precio = extras.getString("price");
 
 
         //img.setim(extras.getString("name"));
         Picasso.get().load(imgUriList.get(0)).into(img);
         name.setText(extras.getString("name"));
-        price.setText(extras.getString("price"));
+        price.setText(precio + "€");
         description.setText(extras.getString("description"));
         getUrl = extras.getString("fileUrl");
 

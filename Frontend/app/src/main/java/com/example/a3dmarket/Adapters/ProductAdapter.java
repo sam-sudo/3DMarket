@@ -60,7 +60,7 @@ public class ProductAdapter extends BaseAdapter {
 
         Picasso.get().load(item.getImgList().get(0)).into(img);
         name.setText(item.getName());
-        price.setText(item.getPrice());
+        price.setText(item.getPrice() + "€");
         date.setText(item.getDateSale());
 
         return convertView;

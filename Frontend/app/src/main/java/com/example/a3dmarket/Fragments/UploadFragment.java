@@ -130,7 +130,7 @@ public class UploadFragment extends Fragment {
                     userEmail = snapshot.child("email").getValue().toString();
 
                 }else{
-                    Toast.makeText(getContext(), "TOAAS", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -171,33 +171,33 @@ public class UploadFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ArrayList<Uri> imagesUri = new ArrayList<Uri>() {
-                };
+                ArrayList<Uri> imagesUri = new ArrayList<Uri>() {};
 
-                if(previewImgList.size() > 0 ){
+                if (!editName.getText().toString().isEmpty() && !editDescription.getText().toString().isEmpty() && !editPrice.getText().toString().isEmpty()){
+                    Toast.makeText(getContext()," Subiendo...",Toast.LENGTH_LONG).show();
+                    if(previewImgList.size() > 0 ){
 
-                    for (Uri uri: previewImgList) {
-                        Log.d("TAG", "onClick: " + uri);
-                        imagesUri.add(uri);
+                        for (Uri uri: previewImgList) {
+                            Log.d("TAG", "onClick: " + uri);
+                            imagesUri.add(uri);
+                        }
+
+                        try {
+                            UpFilesToFirebase(imagesUri);
+
+                            btnUp.setEnabled(false);
+                        }catch (Exception e){
+                            Log.d("TAG", "onClick: FALLO AL SUBIR ARCHUVOS");
+                            Toast.makeText(getContext(),"Faltan datos por rellenar",Toast.LENGTH_SHORT).show();
+                            btnUp.setEnabled(true);
+                        }
+
                     }
-
-                    try {
-                        UpFilesToFirebase(imagesUri);
-
-                        btnUp.setEnabled(false);
-                    }catch (Exception e){
-                        Log.d("TAG", "onClick: FALLO AL SUBIR ARCHUVOS");
-                        Toast.makeText(getContext(),"Faltan datos por rellenar",Toast.LENGTH_SHORT).show();
-                        btnUp.setEnabled(true);
-                    }
-
-
-
-
-
-
-
+                }else{
+                    Toast.makeText(getContext(),"Faltan datos por rellenar",Toast.LENGTH_SHORT).show();
                 }
+
+
 
 
             }
